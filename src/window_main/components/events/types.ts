@@ -6,7 +6,7 @@ import { TableControlsProps, TableData } from "../tables/types";
 export interface EventStats {
   displayName: string;
   duration?: number;
-  eventState: string;
+  eventState: "Completed" | "In Progress";
   gameWins?: number;
   gameLosses?: number;
   isMissingMatchData: boolean;
