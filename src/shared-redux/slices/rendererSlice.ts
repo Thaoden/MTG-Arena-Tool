@@ -54,11 +54,6 @@ const initialRendererState = {
 };
 
 type RendererState = typeof initialRendererState;
-type Patreon = typeof initialRendererState.patreon;
-type Popup = typeof initialRendererState.popup;
-type ShareDialog = typeof initialRendererState.shareDialog;
-type SubNav = typeof initialRendererState.subNav;
-type SyncToPush = typeof initialRendererState.syncToPush;
 
 const rendererSlice = createSlice<
   RendererState,
@@ -102,16 +97,19 @@ const rendererSlice = createSlice<
     },
     setPatreon: (
       state: RendererState,
-      action: PayloadAction<Patreon>
+      action: PayloadAction<RendererState["patreon"]>
     ): void => {
       state.patreon = action.payload;
     },
-    setPopup: (state: RendererState, action: PayloadAction<Popup>): void => {
+    setPopup: (
+      state: RendererState,
+      action: PayloadAction<RendererState["popup"]>
+    ): void => {
       state.popup = action.payload;
     },
     setShareDialog: (
       state: RendererState,
-      action: PayloadAction<ShareDialog>
+      action: PayloadAction<RendererState["shareDialog"]>
     ): void => {
       state.shareDialog = action.payload;
       state.shareDialog.open = true;
@@ -128,7 +126,10 @@ const rendererSlice = createSlice<
     ): void => {
       state.shareDialog.url = action.payload;
     },
-    setSubNav: (state: RendererState, action: PayloadAction<SubNav>): void => {
+    setSubNav: (
+      state: RendererState,
+      action: PayloadAction<RendererState["subNav"]>
+    ): void => {
       if (action.payload.type == -1) {
         state.navIndex = 0;
       } else {
@@ -175,9 +176,9 @@ const rendererSlice = createSlice<
     },
     setSyncToPush: (
       state: RendererState,
-      action: PayloadAction<SyncToPush>
+      action: PayloadAction<RendererState["syncToPush"]>
     ): void => {
-      Object.assign(state.syncToPush, action.payload);
+      state.syncToPush = action.payload;
     }
   }
 });

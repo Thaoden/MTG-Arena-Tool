@@ -65,8 +65,6 @@ const playerDataState = {
 };
 
 type PlayerData = typeof playerDataState;
-type RankData = typeof playerDataState.rank;
-type EconomyData = typeof playerDataState.economy;
 
 const incrementCardCount = (state: PlayerData, grpId: number): void => {
   state.cards.cards[grpId] = state.cards.cards[grpId] + 1 || 1;
@@ -89,14 +87,17 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
     ): void => {
       state.arenaVersion = action.payload;
     },
-    setRank: (state: PlayerData, action: PayloadAction<RankData>): void => {
+    setRank: (
+      state: PlayerData,
+      action: PayloadAction<PlayerData["rank"]>
+    ): void => {
       state.rank = action.payload;
     },
     setEconomy: (
       state: PlayerData,
-      action: PayloadAction<EconomyData>
+      action: PayloadAction<PlayerData["economy"]>
     ): void => {
-      Object.assign(state.economy, action.payload);
+      state.economy = action.payload;
     },
     setTagColors: (
       state: PlayerData,

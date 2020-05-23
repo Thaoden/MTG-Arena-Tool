@@ -44,7 +44,6 @@ const initialExploreState = {
 };
 
 type Explore = typeof initialExploreState;
-type ExploreData = typeof initialExploreState.data;
 
 const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
   name: "explore",
@@ -52,7 +51,7 @@ const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
   reducers: {
     setExploreData: (
       state: Explore,
-      action: PayloadAction<ExploreData>
+      action: PayloadAction<Explore["data"]>
     ): void => {
       const isSameResultType =
         state.data.results_type === action.payload.results_type;

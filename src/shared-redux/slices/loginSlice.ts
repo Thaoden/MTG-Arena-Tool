@@ -16,7 +16,6 @@ const initialLoginState = {
 };
 
 type Login = typeof initialLoginState;
-type LoginForm = typeof initialLoginState.loginForm;
 
 const loginSlice = createSlice<Login, SliceCaseReducers<Login>>({
   name: "login",
@@ -34,7 +33,10 @@ const loginSlice = createSlice<Login, SliceCaseReducers<Login>>({
     setLoginRemember: (state: Login, action: PayloadAction<boolean>): void => {
       state.loginForm.rememberme = action.payload;
     },
-    setLoginForm: (state: Login, action: PayloadAction<LoginForm>): void => {
+    setLoginForm: (
+      state: Login,
+      action: PayloadAction<Login["loginForm"]>
+    ): void => {
       state.loginForm = action.payload;
     },
     setCanLogin: (state: Login, action: PayloadAction<boolean>): void => {
