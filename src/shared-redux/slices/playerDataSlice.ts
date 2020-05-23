@@ -97,7 +97,7 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
       state: PlayerData,
       action: PayloadAction<PlayerData["economy"]>
     ): void => {
-      state.economy = action.payload;
+      state.economy = { ...action.payload };
     },
     setTagColors: (
       state: PlayerData,

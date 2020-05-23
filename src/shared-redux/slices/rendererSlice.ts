@@ -178,7 +178,7 @@ const rendererSlice = createSlice<
       state: RendererState,
       action: PayloadAction<RendererState["syncToPush"]>
     ): void => {
-      state.syncToPush = action.payload;
+      state.syncToPush = { ...action.payload };
     }
   }
 });
