@@ -11,7 +11,7 @@ import {
   IPC_NONE,
   IPC_MAIN
 } from "../shared/constants";
-import actions, { Actions } from "./actions";
+import actions, { Actions, ActionsArg } from "./actions";
 const ipc = electron.ipcMain;
 const ipcRenderer = electron.ipcRenderer;
 
@@ -85,12 +85,20 @@ export function initializeRendererReduxIPC(store: EnhancedStore): void {
  */
 export function reduxAction(
   dispatch: Dispatch<AnyAction>,
+  actionArg: ActionsArg,
   type: Actions,
   arg: any,
   to: number
 ): void {
-  dispatch(actions[type](arg));
+  dispatch(actions[actionArg.type](actionArg.arg));
+  //dispatch(actions[type](arg));
   if (to !== IPC_NONE) {
-    ipcRenderer.send("redux-action", type, JSON.stringify(arg), to);
+    ipcRenderer.send(
+      "redux-action",
+      actionArg.type,
+      JSON.stringify(actionArg.arg),
+      to
+    );
+    //ipcRenderer.send("redux-action", type, JSON.stringify(arg), to);
   }
 }
