@@ -4,7 +4,7 @@ import * as AppSettingsSlice from "./slices/appSettingsSlice";
 import * as RendererSlice from "./slices/rendererSlice";
 import * as HoverSlice from "./slices/hoverSlice";
 import * as LoginSlice from "./slices/loginSlice";
-import homeSlice from "./slices/homeSlice";
+import * as HomeSlice from "./slices/homeSlice";
 import * as CollectionSlice from "./slices/collectionSlice";
 import * as ExploreSlice from "./slices/exploreSlice";
 import * as MatchesSlice from "./slices/matchesSlice";
@@ -121,7 +121,7 @@ const actions: Record<
   SET_LOGIN_PASSWORD: LoginSlice.setLoginPassword,
   SET_LOGIN_REMEMBER: LoginSlice.setLoginRemember,
   SET_LOGIN_STATE: LoginSlice.setLoginState,
-  SET_HOME_DATA: homeSlice.actions.setHomeData,
+  SET_HOME_DATA: HomeSlice.setHomeData,
   SET_BOOSTER_WIN_FACTOR: CollectionSlice.setBoosterWinFactor,
   SET_COUNT_MODE: CollectionSlice.setCountMode,
   SET_FUTURE_BOOSTERS: CollectionSlice.setFutureBoosters,
