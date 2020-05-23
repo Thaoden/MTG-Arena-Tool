@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 
 const initialCollectionState = {
   countMode: "All cards",
@@ -14,22 +18,41 @@ const collectionSlice = createSlice<Collection, SliceCaseReducers<Collection>>({
   name: "collection",
   initialState: initialCollectionState,
   reducers: {
-    setCountMode: (state: Collection, action): void => {
+    setCountMode: (state: Collection, action: PayloadAction<string>): void => {
       state.countMode = action.payload;
     },
-    setRareDraftFactor: (state: Collection, action): void => {
+    setRareDraftFactor: (
+      state: Collection,
+      action: PayloadAction<number>
+    ): void => {
       state.rareDraftFactor = action.payload;
     },
-    setMythicDraftFactor: (state: Collection, action): void => {
+    setMythicDraftFactor: (
+      state: Collection,
+      action: PayloadAction<number>
+    ): void => {
       state.mythicDraftFactor = action.payload;
     },
-    setBoosterWinFactor: (state: Collection, action): void => {
+    setBoosterWinFactor: (
+      state: Collection,
+      action: PayloadAction<number>
+    ): void => {
       state.boosterWinFactor = action.payload;
     },
-    setFutureBoosters: (state: Collection, action): void => {
+    setFutureBoosters: (
+      state: Collection,
+      action: PayloadAction<number>
+    ): void => {
       state.futureBoosters = action.payload;
     }
   }
 });
 
+export const {
+  setBoosterWinFactor,
+  setCountMode,
+  setFutureBoosters,
+  setMythicDraftFactor,
+  setRareDraftFactor
+} = collectionSlice.actions;
 export default collectionSlice;

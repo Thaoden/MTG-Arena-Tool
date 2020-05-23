@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 
 export interface ExploreQuery {
   filterWCC: string;
@@ -40,12 +44,16 @@ const initialExploreState = {
 };
 
 type Explore = typeof initialExploreState;
+type ExploreData = typeof initialExploreState.data;
 
 const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
   name: "explore",
   initialState: initialExploreState,
   reducers: {
-    setExploreData: (state: Explore, action): void => {
+    setExploreData: (
+      state: Explore,
+      action: PayloadAction<ExploreData>
+    ): void => {
       const isSameResultType =
         state.data.results_type === action.payload.results_type;
       const isSubsequentResult = action.payload.skip > state.data.skip;
@@ -67,16 +75,29 @@ const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
         state.data = action.payload;
       }
     },
-    setExploreFilters: (state: Explore, action): void => {
+    setExploreFilters: (
+      state: Explore,
+      action: PayloadAction<ExploreQuery>
+    ): void => {
       state.filters = action.payload;
     },
-    setExploreFiltersSkip: (state: Explore, action): void => {
+    setExploreFiltersSkip: (
+      state: Explore,
+      action: PayloadAction<number>
+    ): void => {
       state.filters.filterSkip = action.payload;
     },
-    setActiveEvents: (state: Explore, action): void => {
+    setActiveEvents: (state: Explore, action: PayloadAction<string>): void => {
       state.activeEvents.push(...action.payload);
     }
   }
 });
+
+export const {
+  setActiveEvents,
+  setExploreData,
+  setExploreFilters,
+  setExploreFiltersSkip
+} = exploreSlice.actions;
 
 export default exploreSlice;

@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 import { SeasonalRankData } from "../../types/Season";
 import globalStore from "../../shared-store";
 
@@ -12,8 +16,11 @@ const seasonalSlice = createSlice<Seasonal, SliceCaseReducers<Seasonal>>({
   name: "seasonal",
   initialState: initialSeasonalState,
   reducers: {
-    setSeasonal: (state: Seasonal, action): void => {
-      const update = action.payload as SeasonalRankData;
+    setSeasonal: (
+      state: Seasonal,
+      action: PayloadAction<SeasonalRankData>
+    ): void => {
+      const update = action.payload;
       // Add to global store
       globalStore.seasonal[update.id] = update;
       const season = `${update.rankUpdateType.toLowerCase()}_${
@@ -22,7 +29,10 @@ const seasonalSlice = createSlice<Seasonal, SliceCaseReducers<Seasonal>>({
       // Add to indexes
       state.seasonal[season] = [...(state.seasonal[season] || []), update.id];
     },
-    setManySeasonal: (state: Seasonal, action): void => {
+    setManySeasonal: (
+      state: Seasonal,
+      action: PayloadAction<{ [id: string]: SeasonalRankData }>
+    ): void => {
       const newSeasonal = { ...state.seasonal };
       Object.keys(action.payload).forEach((id: string) => {
         const update = action.payload[id] as SeasonalRankData;
@@ -38,5 +48,7 @@ const seasonalSlice = createSlice<Seasonal, SliceCaseReducers<Seasonal>>({
     }
   }
 });
+
+export const { setSeasonal, setManySeasonal } = seasonalSlice.actions;
 
 export default seasonalSlice;

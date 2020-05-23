@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalEvent } from "../../types/event";
 
@@ -12,14 +16,17 @@ const eventsSlice = createSlice<Events, SliceCaseReducers<Events>>({
   name: "events",
   initialState: initialEventsState,
   reducers: {
-    setEvent: (state: Events, action): void => {
-      const event = action.payload as InternalEvent;
+    setEvent: (state: Events, action: PayloadAction<InternalEvent>): void => {
+      const event = action.payload;
       globalStore.events[event.id] = { ...event };
       if (state.eventsIndex.indexOf(event.id) === -1) {
         state.eventsIndex.push(event.id);
       }
     },
-    setManyEvents: (state: Events, action): void => {
+    setManyEvents: (
+      state: Events,
+      action: PayloadAction<InternalEvent[]>
+    ): void => {
       const newList: string[] = [];
       action.payload.map((event: InternalEvent) => {
         if (state.eventsIndex.indexOf(event.id) === -1) {
@@ -31,5 +38,7 @@ const eventsSlice = createSlice<Events, SliceCaseReducers<Events>>({
     }
   }
 });
+
+export const { setEvent, setManyEvents } = eventsSlice.actions;
 
 export default eventsSlice;

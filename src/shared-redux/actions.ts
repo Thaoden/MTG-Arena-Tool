@@ -1,23 +1,20 @@
-import settingsSlice from "./slices/settingsSlice";
-import playerDataSlice from "./slices/playerDataSlice";
-import appSettingsSlice from "./slices/appSettingsSlice";
-import rendererSlice from "./slices/rendererSlice";
-import hoverSlice from "./slices/hoverSlice";
-import loginSlice from "./slices/loginSlice";
+import * as SettingsSlice from "./slices/settingsSlice";
+import * as PlayerDataSlice from "./slices/playerDataSlice";
+import * as AppSettingsSlice from "./slices/appSettingsSlice";
+import * as RendererSlice from "./slices/rendererSlice";
+import * as HoverSlice from "./slices/hoverSlice";
+import * as LoginSlice from "./slices/loginSlice";
 import homeSlice from "./slices/homeSlice";
-import collectionSlice from "./slices/collectionSlice";
-import exploreSlice from "./slices/exploreSlice";
-import matchesSlice from "./slices/matchesSlice";
-import eventsSlice from "./slices/eventsSlice";
-import decksSlice from "./slices/decksSlice";
-import economySlice from "./slices/economySlice";
-import draftsSlice from "./slices/draftsSlice";
-import seasonalSlice from "./slices/seasonalSlice";
-import deckChangesSlice from "./slices/deckChangesSlice";
-import {
-  ActionCreatorWithPayload,
-  ActionCreatorWithoutPayload
-} from "@reduxjs/toolkit";
+import * as CollectionSlice from "./slices/collectionSlice";
+import * as ExploreSlice from "./slices/exploreSlice";
+import * as MatchesSlice from "./slices/matchesSlice";
+import * as EventsSlice from "./slices/eventsSlice";
+import * as DecksSlice from "./slices/decksSlice";
+import * as EconomySlice from "./slices/economySlice";
+import * as DraftsSlice from "./slices/draftsSlice";
+import * as SeasonalSlice from "./slices/seasonalSlice";
+import * as DeckChangesSlice from "./slices/deckChangesSlice";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 export type Actions =
   | "SET_SETTINGS"
@@ -93,78 +90,78 @@ export type Actions =
 
 const actions: Record<
   Actions,
-  ActionCreatorWithPayload<any | string> | ActionCreatorWithoutPayload<string>
+  ActionCreatorWithPayload<any, string> //<P, T> where P is the type of the payload and T the type of the Action
 > = {
-  SET_SETTINGS: settingsSlice.actions.setSettings,
-  SET_APP_SETTINGS: appSettingsSlice.actions.setAppSettings,
-  SET_ARCHIVED: rendererSlice.actions.setArchived,
-  SET_BACK_COLOR: rendererSlice.actions.setBackgroundColor,
-  SET_BACK_GRPID: rendererSlice.actions.setBackgroundGrpId,
-  SET_BACK_IMAGE: rendererSlice.actions.setBackgroundImage,
-  SET_LOADING: rendererSlice.actions.setLoading,
-  SET_NO_LOG: rendererSlice.actions.setNoLog,
-  SET_OFFLINE: rendererSlice.actions.setOffline,
-  SET_PATREON: rendererSlice.actions.setPatreon,
-  SET_POPUP: rendererSlice.actions.setPopup,
-  SET_SHARE_DIALOG: rendererSlice.actions.setShareDialog,
-  SET_SHARE_DIALOG_OPEN: rendererSlice.actions.setShareDialogOpen,
-  SET_SHARE_DIALOG_URL: rendererSlice.actions.setShareDialogUrl,
-  SET_NAV_INDEX: rendererSlice.actions.setNavIndex,
-  SET_SUBNAV: rendererSlice.actions.setSubNav,
-  SET_TOPARTIST: rendererSlice.actions.setTopArtist,
-  SET_TOPNAV: rendererSlice.actions.setTopNav,
-  SET_UPDATE_STATE: rendererSlice.actions.setUpdateState,
-  SET_SYNC_STATE: rendererSlice.actions.setSyncState,
-  SET_TO_PUSH: rendererSlice.actions.setSyncToPush,
-  SET_HOVER_IN: hoverSlice.actions.setHoverIn,
-  SET_HOVER_OUT: hoverSlice.actions.setHoverOut,
-  SET_CAN_LOGIN: loginSlice.actions.setCanLogin,
-  SET_LOGIN_EMAIL: loginSlice.actions.setLoginEmail,
-  SET_LOGIN_FORM: loginSlice.actions.setLoginForm,
-  SET_LOGIN_PASSWORD: loginSlice.actions.setLoginPassword,
-  SET_LOGIN_REMEMBER: loginSlice.actions.setLoginRemember,
-  SET_LOGIN_STATE: loginSlice.actions.setLoginState,
+  SET_SETTINGS: SettingsSlice.setSettings,
+  SET_APP_SETTINGS: AppSettingsSlice.setAppSettings,
+  SET_ARCHIVED: RendererSlice.setArchived,
+  SET_BACK_COLOR: RendererSlice.setBackgroundColor,
+  SET_BACK_GRPID: RendererSlice.setBackgroundGrpId,
+  SET_BACK_IMAGE: RendererSlice.setBackgroundImage,
+  SET_LOADING: RendererSlice.setLoading,
+  SET_NO_LOG: RendererSlice.setNoLog,
+  SET_OFFLINE: RendererSlice.setOffline,
+  SET_PATREON: RendererSlice.setPatreon,
+  SET_POPUP: RendererSlice.setPopup,
+  SET_SHARE_DIALOG: RendererSlice.setShareDialog,
+  SET_SHARE_DIALOG_OPEN: RendererSlice.setShareDialogOpen,
+  SET_SHARE_DIALOG_URL: RendererSlice.setShareDialogUrl,
+  SET_NAV_INDEX: RendererSlice.setNavIndex,
+  SET_SUBNAV: RendererSlice.setSubNav,
+  SET_TOPARTIST: RendererSlice.setTopArtist,
+  SET_TOPNAV: RendererSlice.setTopNav,
+  SET_UPDATE_STATE: RendererSlice.setUpdateState,
+  SET_SYNC_STATE: RendererSlice.setSyncState,
+  SET_TO_PUSH: RendererSlice.setSyncToPush,
+  SET_HOVER_IN: HoverSlice.setHoverIn,
+  SET_HOVER_OUT: HoverSlice.setHoverOut,
+  SET_CAN_LOGIN: LoginSlice.setCanLogin,
+  SET_LOGIN_EMAIL: LoginSlice.setLoginEmail,
+  SET_LOGIN_FORM: LoginSlice.setLoginForm,
+  SET_LOGIN_PASSWORD: LoginSlice.setLoginPassword,
+  SET_LOGIN_REMEMBER: LoginSlice.setLoginRemember,
+  SET_LOGIN_STATE: LoginSlice.setLoginState,
   SET_HOME_DATA: homeSlice.actions.setHomeData,
-  SET_BOOSTER_WIN_FACTOR: collectionSlice.actions.setBoosterWinFactor,
-  SET_COUNT_MODE: collectionSlice.actions.setCountMode,
-  SET_FUTURE_BOOSTERS: collectionSlice.actions.setFutureBoosters,
-  SET_MYTHIC_DRAFT_FACTOR: collectionSlice.actions.setMythicDraftFactor,
-  SET_RARE_DRAFT_FACTOR: collectionSlice.actions.setRareDraftFactor,
-  SET_ACTIVE_EVENTS: exploreSlice.actions.setActiveEvents,
-  SET_EXPLORE_DATA: exploreSlice.actions.setExploreData,
-  SET_EXPLORE_FILTERS: exploreSlice.actions.setExploreFilters,
-  SET_EXPLORE_FILTERS_SKIP: exploreSlice.actions.setExploreFiltersSkip,
-  SET_MATCH: matchesSlice.actions.setMatch,
-  SET_MANY_MATCHES: matchesSlice.actions.setManyMatches,
-  SET_EVENT: eventsSlice.actions.setEvent,
-  SET_MANY_EVENTS: eventsSlice.actions.setManyEvents,
-  SET_PLAYERDB: playerDataSlice.actions.setPlayerDb,
-  SET_APPDB: playerDataSlice.actions.setAppDb,
-  SET_PLAYER_ID: playerDataSlice.actions.setPlayerId,
-  SET_PLAYER_NAME: playerDataSlice.actions.setPlayerName,
-  SET_ARENA_VERSION: playerDataSlice.actions.setArenaVersion,
-  SET_PLAYER_ECONOMY: playerDataSlice.actions.setEconomy,
-  SET_TAG_COLORS: playerDataSlice.actions.setTagColors,
-  EDIT_TAG_COLOR: playerDataSlice.actions.editTagColor,
-  SET_RANK: playerDataSlice.actions.setRank,
-  ADD_CARD: playerDataSlice.actions.addCard,
-  ADD_CARDS_LIST: playerDataSlice.actions.addCardsList,
-  ADD_CARDS_KEYS: playerDataSlice.actions.addCardsKeys,
-  ADD_CARDS_FROM_STORE: playerDataSlice.actions.addCardsFromStore,
-  REMOVE_DECK_TAG: playerDataSlice.actions.removeDeckTag,
-  ADD_DECK_TAG: playerDataSlice.actions.addDeckTag,
-  SET_DECK_TAGS: playerDataSlice.actions.setDeckTags,
-  SET_DECK: decksSlice.actions.setDeck,
-  SET_MANY_DECKS: decksSlice.actions.setManyDecks,
-  SET_MANY_STATIC_DECKS: decksSlice.actions.setManyStaticDecks,
-  SET_ECONOMY: economySlice.actions.setEconomy,
-  SET_MANY_ECONOMY: economySlice.actions.setManyEconomy,
-  SET_DRAFT: draftsSlice.actions.setDraft,
-  SET_MANY_DRAFT: draftsSlice.actions.setManyDrafts,
-  SET_SEASONAL: seasonalSlice.actions.setSeasonal,
-  SET_MANY_SEASONAL: seasonalSlice.actions.setManySeasonal,
-  SET_DECK_CHANGE: deckChangesSlice.actions.setChange,
-  SET_MANY_DECK_CHANGES: deckChangesSlice.actions.setManyChangees
+  SET_BOOSTER_WIN_FACTOR: CollectionSlice.setBoosterWinFactor,
+  SET_COUNT_MODE: CollectionSlice.setCountMode,
+  SET_FUTURE_BOOSTERS: CollectionSlice.setFutureBoosters,
+  SET_MYTHIC_DRAFT_FACTOR: CollectionSlice.setMythicDraftFactor,
+  SET_RARE_DRAFT_FACTOR: CollectionSlice.setRareDraftFactor,
+  SET_ACTIVE_EVENTS: ExploreSlice.setActiveEvents,
+  SET_EXPLORE_DATA: ExploreSlice.setExploreData,
+  SET_EXPLORE_FILTERS: ExploreSlice.setExploreFilters,
+  SET_EXPLORE_FILTERS_SKIP: ExploreSlice.setExploreFiltersSkip,
+  SET_MATCH: MatchesSlice.setMatch,
+  SET_MANY_MATCHES: MatchesSlice.setManyMatches,
+  SET_EVENT: EventsSlice.setEvent,
+  SET_MANY_EVENTS: EventsSlice.setManyEvents,
+  SET_PLAYERDB: PlayerDataSlice.setPlayerDb,
+  SET_APPDB: PlayerDataSlice.setAppDb,
+  SET_PLAYER_ID: PlayerDataSlice.setPlayerId,
+  SET_PLAYER_NAME: PlayerDataSlice.setPlayerName,
+  SET_ARENA_VERSION: PlayerDataSlice.setArenaVersion,
+  SET_PLAYER_ECONOMY: PlayerDataSlice.setEconomy,
+  SET_TAG_COLORS: PlayerDataSlice.setTagColors,
+  EDIT_TAG_COLOR: PlayerDataSlice.editTagColor,
+  SET_RANK: PlayerDataSlice.setRank,
+  ADD_CARD: PlayerDataSlice.addCard,
+  ADD_CARDS_LIST: PlayerDataSlice.addCardsList,
+  ADD_CARDS_KEYS: PlayerDataSlice.addCardsKeys,
+  ADD_CARDS_FROM_STORE: PlayerDataSlice.addCardsFromStore,
+  REMOVE_DECK_TAG: PlayerDataSlice.removeDeckTag,
+  ADD_DECK_TAG: PlayerDataSlice.addDeckTag,
+  SET_DECK_TAGS: PlayerDataSlice.setDeckTags,
+  SET_DECK: DecksSlice.setDeck,
+  SET_MANY_DECKS: DecksSlice.setManyDecks,
+  SET_MANY_STATIC_DECKS: DecksSlice.setManyStaticDecks,
+  SET_ECONOMY: EconomySlice.setEconomy,
+  SET_MANY_ECONOMY: EconomySlice.setManyEconomy,
+  SET_DRAFT: DraftsSlice.setDraft,
+  SET_MANY_DRAFT: DraftsSlice.setManyDrafts,
+  SET_SEASONAL: SeasonalSlice.setSeasonal,
+  SET_MANY_SEASONAL: SeasonalSlice.setManySeasonal,
+  SET_DECK_CHANGE: DeckChangesSlice.setChange,
+  SET_MANY_DECK_CHANGES: DeckChangesSlice.setManyChangees
 };
 
 export default actions;

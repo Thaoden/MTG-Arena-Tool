@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 
 const initialAppSettings = {
   email: "",
@@ -21,10 +25,14 @@ const settingsSlice = createSlice<AppSettings, SliceCaseReducers<AppSettings>>({
   name: "appsettings",
   initialState: initialAppSettings,
   reducers: {
-    setAppSettings: (state: AppSettings, action): void => {
+    setAppSettings: (
+      state: AppSettings,
+      action: PayloadAction<AppSettings>
+    ): void => {
       Object.assign(state, action.payload);
     }
   }
 });
 
+export const { setAppSettings } = settingsSlice.actions;
 export default settingsSlice;

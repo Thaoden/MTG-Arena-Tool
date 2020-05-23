@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 import { differenceInDays } from "date-fns";
 
 const playerDataState = {
@@ -61,6 +65,8 @@ const playerDataState = {
 };
 
 type PlayerData = typeof playerDataState;
+type RankData = typeof playerDataState.rank;
+type EconomyData = typeof playerDataState.economy;
 
 const incrementCardCount = (state: PlayerData, grpId: number): void => {
   state.cards.cards[grpId] = state.cards.cards[grpId] + 1 || 1;
@@ -71,37 +77,55 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
   name: "playerdata",
   initialState: playerDataState,
   reducers: {
-    setPlayerId: (state: PlayerData, action): void => {
+    setPlayerId: (state: PlayerData, action: PayloadAction<string>): void => {
       state.arenaId = action.payload;
     },
-    setPlayerName: (state: PlayerData, action): void => {
+    setPlayerName: (state: PlayerData, action: PayloadAction<string>): void => {
       state.playerName = action.payload;
     },
-    setArenaVersion: (state: PlayerData, action): void => {
+    setArenaVersion: (
+      state: PlayerData,
+      action: PayloadAction<string>
+    ): void => {
       state.arenaVersion = action.payload;
     },
-    setRank: (state: PlayerData, action): void => {
+    setRank: (state: PlayerData, action: PayloadAction<RankData>): void => {
       state.rank = action.payload;
     },
-    setEconomy: (state: PlayerData, action): void => {
+    setEconomy: (
+      state: PlayerData,
+      action: PayloadAction<EconomyData>
+    ): void => {
       Object.assign(state.economy, action.payload);
     },
-    setTagColors: (state: PlayerData, action): void => {
+    setTagColors: (
+      state: PlayerData,
+      action: PayloadAction<Record<string, string>>
+    ): void => {
       Object.assign(state.tagsColors, action.payload);
     },
-    editTagColor: (state: PlayerData, action): void => {
+    editTagColor: (
+      state: PlayerData,
+      action: PayloadAction<{ tag: string; color: string }>
+    ): void => {
       const { tag, color } = action.payload;
       state.tagsColors = { ...state.tagsColors, [tag]: color };
     },
-    addCard: (state: PlayerData, action): void => {
+    addCard: (state: PlayerData, action: PayloadAction<number>): void => {
       incrementCardCount(state, action.payload);
     },
-    addCardsList: (state: PlayerData, action): void => {
+    addCardsList: (
+      state: PlayerData,
+      action: PayloadAction<number[]>
+    ): void => {
       action.payload.forEach((grpId: number) => {
         incrementCardCount(state, grpId);
       });
     },
-    addCardsKeys: (state: PlayerData, action): void => {
+    addCardsKeys: (
+      state: PlayerData,
+      action: PayloadAction<{ [grpId: string]: number }>
+    ): void => {
       const now = Date.now();
       const json = action.payload;
       const newCards = { ...state.cards };
@@ -122,6 +146,7 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
       state.cards = newCards;
     },
     addCardsFromStore: (state: PlayerData, action): void => {
+      console.log("addCardsFromStore payload: ", action.payload);
       Object.assign(state.cards, action.payload);
       const json = action.payload;
       const newCards = { ...state.cardsNew };
@@ -134,13 +159,19 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
       });
       state.cardsNew = newCards;
     },
-    addDeckTag: (state: PlayerData, action): void => {
+    addDeckTag: (
+      state: PlayerData,
+      action: PayloadAction<{ tag: string; deck: string }>
+    ): void => {
       const { tag, deck } = action.payload;
       const tags = state.deckTags[deck] || [];
       if (tags.indexOf(tag) == -1) tags.push(tag);
       state.deckTags[deck] = tags;
     },
-    removeDeckTag: (state: PlayerData, action): void => {
+    removeDeckTag: (
+      state: PlayerData,
+      action: PayloadAction<{ tag: string; deck: string }>
+    ): void => {
       const { tag, deck } = action.payload;
       const tags = state.deckTags[deck] || [];
       if (tags.includes(tag)) {
@@ -148,16 +179,37 @@ const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
       }
       state.deckTags[deck] = tags;
     },
-    setDeckTags: (state: PlayerData, action): void => {
+    setDeckTags: (
+      state: PlayerData,
+      action: PayloadAction<Record<string, string[]>>
+    ): void => {
       state.deckTags = action.payload;
     },
-    setPlayerDb: (state: PlayerData, action): void => {
+    setPlayerDb: (state: PlayerData, action: PayloadAction<string>): void => {
       state.playerDbPath = action.payload;
     },
-    setAppDb: (state: PlayerData, action): void => {
+    setAppDb: (state: PlayerData, action: PayloadAction<string>): void => {
       state.appDbPath = action.payload;
     }
   }
 });
 
+export const {
+  setPlayerDb,
+  setAppDb,
+  setPlayerName,
+  setPlayerId,
+  setEconomy,
+  setArenaVersion,
+  setTagColors,
+  editTagColor,
+  setRank,
+  addCard,
+  addCardsFromStore,
+  addCardsKeys,
+  addCardsList,
+  removeDeckTag,
+  addDeckTag,
+  setDeckTags
+} = playerDataSlice.actions;
 export default playerDataSlice;

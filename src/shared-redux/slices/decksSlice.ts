@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalDeck } from "../../types/Deck";
 
@@ -12,14 +16,17 @@ const decksSlice = createSlice<Decks, SliceCaseReducers<Decks>>({
   name: "decks",
   initialState: initialDecksState,
   reducers: {
-    setDeck: (state: Decks, action): void => {
-      const deck = action.payload as InternalDeck;
+    setDeck: (state: Decks, action: PayloadAction<InternalDeck>): void => {
+      const deck = action.payload;
       globalStore.decks[deck.id] = { ...deck };
       if (state.decksIndex.indexOf(deck.id) === -1) {
         state.decksIndex.push(deck.id);
       }
     },
-    setManyDecks: (state: Decks, action): void => {
+    setManyDecks: (
+      state: Decks,
+      action: PayloadAction<InternalDeck[]>
+    ): void => {
       const newList: string[] = [];
       action.payload.map((deck: InternalDeck) => {
         if (state.decksIndex.indexOf(deck.id) === -1) {
@@ -29,7 +36,10 @@ const decksSlice = createSlice<Decks, SliceCaseReducers<Decks>>({
       });
       state.decksIndex = [...newList, ...state.decksIndex];
     },
-    setManyStaticDecks: (state: Decks, action): void => {
+    setManyStaticDecks: (
+      state: Decks,
+      action: PayloadAction<InternalDeck[]>
+    ): void => {
       const newList: string[] = [];
       action.payload.map((deck: InternalDeck) => {
         globalStore.decks[deck.id] = deck;
@@ -44,5 +54,7 @@ const decksSlice = createSlice<Decks, SliceCaseReducers<Decks>>({
     }
   }
 });
+
+export const { setDeck, setManyDecks, setManyStaticDecks } = decksSlice.actions;
 
 export default decksSlice;

@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 import defaultConfig from "../../shared/defaultConfig";
 
 const initialSettings = { ...defaultConfig.settings };
@@ -9,10 +13,11 @@ const settingsSlice = createSlice<Settings, SliceCaseReducers<Settings>>({
   name: "settings",
   initialState: initialSettings,
   reducers: {
-    setSettings: (state: Settings, action): void => {
+    setSettings: (state: Settings, action: PayloadAction<Settings>): void => {
       Object.assign(state, action.payload);
     }
   }
 });
 
+export const { setSettings } = settingsSlice.actions;
 export default settingsSlice;

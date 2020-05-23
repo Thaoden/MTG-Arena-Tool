@@ -1,4 +1,8 @@
-import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  SliceCaseReducers,
+  PayloadAction
+} from "@reduxjs/toolkit";
 
 const initialRendererState = {
   archivedCache: {} as Record<string, boolean>,
@@ -50,6 +54,11 @@ const initialRendererState = {
 };
 
 type RendererState = typeof initialRendererState;
+type Patreon = typeof initialRendererState.patreon;
+type Popup = typeof initialRendererState.popup;
+type ShareDialog = typeof initialRendererState.shareDialog;
+type SubNav = typeof initialRendererState.subNav;
+type SyncToPush = typeof initialRendererState.syncToPush;
 
 const rendererSlice = createSlice<
   RendererState,
@@ -58,41 +67,68 @@ const rendererSlice = createSlice<
   name: "renderer",
   initialState: initialRendererState,
   reducers: {
-    setBackgroundColor: (state: RendererState, action): void => {
+    setBackgroundColor: (
+      state: RendererState,
+      action: PayloadAction<string>
+    ): void => {
       state.backgroundColor = action.payload;
     },
-    setBackgroundGrpId: (state: RendererState, action): void => {
+    setBackgroundGrpId: (
+      state: RendererState,
+      action: PayloadAction<number>
+    ): void => {
       state.backgroundGrpId = action.payload;
     },
-    setBackgroundImage: (state: RendererState, action): void => {
+    setBackgroundImage: (
+      state: RendererState,
+      action: PayloadAction<string>
+    ): void => {
       state.backgroundImage = action.payload;
     },
-    setLoading: (state: RendererState, action): void => {
+    setLoading: (
+      state: RendererState,
+      action: PayloadAction<boolean>
+    ): void => {
       state.loading = action.payload;
     },
-    setNoLog: (state: RendererState, action): void => {
+    setNoLog: (state: RendererState, action: PayloadAction<boolean>): void => {
       state.noLog = action.payload;
     },
-    setOffline: (state: RendererState, action): void => {
+    setOffline: (
+      state: RendererState,
+      action: PayloadAction<boolean>
+    ): void => {
       state.offline = action.payload;
     },
-    setPatreon: (state: RendererState, action): void => {
+    setPatreon: (
+      state: RendererState,
+      action: PayloadAction<Patreon>
+    ): void => {
       state.patreon = action.payload;
     },
-    setPopup: (state: RendererState, action): void => {
+    setPopup: (state: RendererState, action: PayloadAction<Popup>): void => {
       state.popup = action.payload;
     },
-    setShareDialog: (state: RendererState, action): void => {
+    setShareDialog: (
+      state: RendererState,
+      action: PayloadAction<ShareDialog>
+    ): void => {
       state.shareDialog = action.payload;
       state.shareDialog.open = true;
     },
-    setShareDialogOpen: (state: RendererState, action): void => {
+    setShareDialogOpen: (
+      state: RendererState,
+      action: PayloadAction<boolean>
+    ): void => {
       state.shareDialog.open = action.payload;
     },
-    setShareDialogUrl: (state: RendererState, action): void => {
+    setShareDialogUrl: (
+      state: RendererState,
+      action: PayloadAction<string>
+    ): void => {
       state.shareDialog.url = action.payload;
     },
-    setSubNav: (state: RendererState, action): void => {
+    setSubNav: (state: RendererState, action: PayloadAction<SubNav>): void => {
       if (action.payload.type == -1) {
         state.navIndex = 0;
       } else {
@@ -100,32 +136,72 @@ const rendererSlice = createSlice<
       }
       state.subNav = action.payload;
     },
-    setTopArtist: (state: RendererState, action): void => {
+    setTopArtist: (
+      state: RendererState,
+      action: PayloadAction<string>
+    ): void => {
       state.topArtist = action.payload;
     },
-    setTopNav: (state: RendererState, action): void => {
+    setTopNav: (state: RendererState, action: PayloadAction<number>): void => {
       state.navIndex = 0;
       state.topNav = action.payload;
     },
-    setNavIndex: (state: RendererState, action): void => {
+    setNavIndex: (
+      state: RendererState,
+      action: PayloadAction<number>
+    ): void => {
       state.navIndex = action.payload;
     },
-    setUpdateState: (state: RendererState, action): void => {
+    setUpdateState: (
+      state: RendererState,
+      action: PayloadAction<string>
+    ): void => {
       state.updateState = action.payload;
     },
-    setArchived: (state: RendererState, action): void => {
+    setArchived: (
+      state: RendererState,
+      action: PayloadAction<{ id: string; archived: boolean }>
+    ): void => {
       const { id, archived } = action.payload;
       if (!id) return;
       // update local cache (avoids round trip)
       state.archivedCache[id] = !!archived;
     },
-    setSyncState: (state: RendererState, action): void => {
+    setSyncState: (
+      state: RendererState,
+      action: PayloadAction<number>
+    ): void => {
       state.syncState = action.payload;
     },
-    setSyncToPush: (state: RendererState, action): void => {
+    setSyncToPush: (
+      state: RendererState,
+      action: PayloadAction<SyncToPush>
+    ): void => {
       Object.assign(state.syncToPush, action.payload);
     }
   }
 });
+
+export const {
+  setBackgroundColor,
+  setBackgroundGrpId,
+  setBackgroundImage,
+  setLoading,
+  setNoLog,
+  setOffline,
+  setPatreon,
+  setPopup,
+  setArchived,
+  setShareDialog,
+  setShareDialogOpen,
+  setShareDialogUrl,
+  setNavIndex,
+  setSubNav,
+  setTopNav,
+  setTopArtist,
+  setUpdateState,
+  setSyncState,
+  setSyncToPush
+} = rendererSlice.actions;
 
 export default rendererSlice;
