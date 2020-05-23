@@ -1,21 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalEvent } from "../../types/event";
 
-const eventsSlice = createSlice({
+const initialEventsState = {
+  eventsIndex: [] as string[]
+};
+
+type Events = typeof initialEventsState;
+
+const eventsSlice = createSlice<Events, SliceCaseReducers<Events>>({
   name: "events",
-  initialState: {
-    eventsIndex: [] as string[]
-  },
+  initialState: initialEventsState,
   reducers: {
-    setEvent: (state, action): void => {
+    setEvent: (state: Events, action): void => {
       const event = action.payload as InternalEvent;
       globalStore.events[event.id] = { ...event };
       if (state.eventsIndex.indexOf(event.id) === -1) {
         state.eventsIndex.push(event.id);
       }
     },
-    setManyEvents: (state, action): void => {
+    setManyEvents: (state: Events, action): void => {
       const newList: string[] = [];
       action.payload.map((event: InternalEvent) => {
         if (state.eventsIndex.indexOf(event.id) === -1) {

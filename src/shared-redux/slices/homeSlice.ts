@@ -1,15 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { WildcardsChange } from "../../window_main/tabs/HomeTab";
 
-const homeSlice = createSlice({
+const initialHomeState = {
+  wildcards: [] as WildcardsChange[],
+  filteredSet: "",
+  usersActive: 0
+};
+
+type Home = typeof initialHomeState;
+
+const homeSlice = createSlice<Home, SliceCaseReducers<Home>>({
   name: "home",
-  initialState: {
-    wildcards: [] as WildcardsChange[],
-    filteredSet: "",
-    usersActive: 0
-  },
+  initialState: initialHomeState,
   reducers: {
-    setHomeData: (state, action): any => action.payload
+    setHomeData: (state: Home, action): any => action.payload
   }
 });
 

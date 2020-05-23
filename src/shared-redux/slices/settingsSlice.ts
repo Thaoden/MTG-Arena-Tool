@@ -1,13 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import defaultConfig from "../../shared/defaultConfig";
 
-const settingsSlice = createSlice({
+const initialSettings = { ...defaultConfig.settings };
+
+type Settings = typeof initialSettings;
+
+const settingsSlice = createSlice<Settings, SliceCaseReducers<Settings>>({
   name: "settings",
-  initialState: {
-    ...defaultConfig.settings
-  },
+  initialState: initialSettings,
   reducers: {
-    setSettings: (state, action): void => {
+    setSettings: (state: Settings, action): void => {
       Object.assign(state, action.payload);
     }
   }

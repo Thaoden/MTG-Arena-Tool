@@ -1,14 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
-const hoverSlice = createSlice({
+const initialHover = {
+  grpId: 0,
+  opacity: 0,
+  wanted: 0
+};
+
+type Hover = typeof initialHover;
+
+const hoverSlice = createSlice<Hover, SliceCaseReducers<Hover>>({
   name: "hover",
-  initialState: {
-    grpId: 0,
-    opacity: 0,
-    wanted: 0
-  },
+  initialState: initialHover,
   reducers: {
-    setHoverIn: (state, action): void => {
+    setHoverIn: (state: Hover, action): void => {
       const { grpId, wanted } = action.payload;
       Object.assign(state, {
         grpId: grpId,
@@ -16,7 +20,7 @@ const hoverSlice = createSlice({
         opacity: 1
       });
     },
-    setHoverOut: (state): void => {
+    setHoverOut: (state: Hover): void => {
       state.opacity = 0;
     }
   }

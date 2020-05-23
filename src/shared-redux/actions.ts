@@ -19,7 +19,7 @@ import {
   ActionCreatorWithoutPayload
 } from "@reduxjs/toolkit";
 
-type Actions =
+export type Actions =
   | "SET_SETTINGS"
   | "SET_APP_SETTINGS"
   | "SET_ARCHIVED"

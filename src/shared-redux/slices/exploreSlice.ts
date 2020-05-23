@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
 export interface ExploreQuery {
   filterWCC: string;
@@ -15,33 +15,37 @@ export interface ExploreQuery {
   filterSkip: number;
 }
 
-const exploreSlice = createSlice({
-  name: "explore",
-  initialState: {
-    activeEvents: [] as string[],
-    data: {
-      results_type: "Ranked Constructed",
-      skip: 0,
-      results_number: 0,
-      result: []
-    },
-    filters: {
-      filterEvent: "Ladder",
-      filterType: "Ranked Constructed",
-      filterSort: "By Winrate",
-      filterSortDir: -1,
-      filterSkip: 0,
-      filterWCC: "",
-      filterWCU: "",
-      filterWCR: "",
-      filterWCM: "",
-      filteredMana: [],
-      filteredRanks: [],
-      onlyOwned: false
-    } as ExploreQuery
+const initialExploreState = {
+  activeEvents: [] as string[],
+  data: {
+    results_type: "Ranked Constructed",
+    skip: 0,
+    results_number: 0,
+    result: [] as any[]
   },
+  filters: {
+    filterEvent: "Ladder",
+    filterType: "Ranked Constructed",
+    filterSort: "By Winrate",
+    filterSortDir: -1,
+    filterSkip: 0,
+    filterWCC: "",
+    filterWCU: "",
+    filterWCR: "",
+    filterWCM: "",
+    filteredMana: [],
+    filteredRanks: [],
+    onlyOwned: false
+  } as ExploreQuery
+};
+
+type Explore = typeof initialExploreState;
+
+const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
+  name: "explore",
+  initialState: initialExploreState,
   reducers: {
-    setExploreData: (state, action): void => {
+    setExploreData: (state: Explore, action): void => {
       const isSameResultType =
         state.data.results_type === action.payload.results_type;
       const isSubsequentResult = action.payload.skip > state.data.skip;
@@ -63,13 +67,13 @@ const exploreSlice = createSlice({
         state.data = action.payload;
       }
     },
-    setExploreFilters: (state, action): void => {
+    setExploreFilters: (state: Explore, action): void => {
       state.filters = action.payload;
     },
-    setExploreFiltersSkip: (state, action): void => {
+    setExploreFiltersSkip: (state: Explore, action): void => {
       state.filters.filterSkip = action.payload;
     },
-    setActiveEvents: (state, action): void => {
+    setActiveEvents: (state: Explore, action): void => {
       state.activeEvents.push(...action.payload);
     }
   }

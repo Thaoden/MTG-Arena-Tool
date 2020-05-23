@@ -1,21 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { DeckChange } from "../../types/Deck";
 
-const deckChangesSlice = createSlice({
+const initialDeckChangesState = {
+  deckChangesIndex: [] as string[]
+};
+
+type DeckChanges = typeof initialDeckChangesState;
+
+const deckChangesSlice = createSlice<
+  DeckChanges,
+  SliceCaseReducers<DeckChanges>
+>({
   name: "deckChanges",
-  initialState: {
-    deckChangesIndex: [] as string[]
-  },
+  initialState: initialDeckChangesState,
   reducers: {
-    setChange: (state, action): void => {
+    setChange: (state: DeckChanges, action): void => {
       const change = action.payload as DeckChange;
       globalStore.deckChanges[change.id] = { ...change };
       if (state.deckChangesIndex.indexOf(change.id) === -1) {
         state.deckChangesIndex.push(change.id);
       }
     },
-    setManyChangees: (state, action): void => {
+    setManyChangees: (state: DeckChanges, action): void => {
       const newList: string[] = [];
       action.payload.map((change: DeckChange) => {
         if (state.deckChangesIndex.indexOf(change.id) === -1) {

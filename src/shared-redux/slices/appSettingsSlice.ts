@@ -1,23 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
-const settingsSlice = createSlice({
+const initialAppSettings = {
+  email: "",
+  token: "",
+  toolVersion: 0,
+  autoLogin: false,
+  launchToTray: false,
+  rememberMe: true,
+  betaChannel: false,
+  metadataLang: "en",
+  logLocaleFormat: "",
+  logTimeExample: "",
+  logTimeFormat: "",
+  logUri: ""
+};
+
+type AppSettings = typeof initialAppSettings;
+
+const settingsSlice = createSlice<AppSettings, SliceCaseReducers<AppSettings>>({
   name: "appsettings",
-  initialState: {
-    email: "",
-    token: "",
-    toolVersion: 0,
-    autoLogin: false,
-    launchToTray: false,
-    rememberMe: true,
-    betaChannel: false,
-    metadataLang: "en",
-    logLocaleFormat: "",
-    logTimeExample: "",
-    logTimeFormat: "",
-    logUri: ""
-  },
+  initialState: initialAppSettings,
   reducers: {
-    setAppSettings: (state, action): void => {
+    setAppSettings: (state: AppSettings, action): void => {
       Object.assign(state, action.payload);
     }
   }

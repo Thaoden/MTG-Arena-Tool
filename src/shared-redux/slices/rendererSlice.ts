@@ -1,85 +1,98 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 
-const rendererSlice = createSlice({
-  name: "renderer",
-  initialState: {
-    archivedCache: {} as Record<string, boolean>,
-    backgroundColor: "rgba(0, 0, 0, 0.25)",
-    backgroundGrpId: 0,
-    backgroundImage: "default",
-    loading: false,
-    noLog: false,
-    offline: false,
-    patreon: {
-      patreon: false,
-      patreonTier: -1
-    },
-    syncState: 0,
-    syncToPush: {
-      courses: [],
-      matches: [],
-      drafts: [],
-      economy: [],
-      seasonal: []
-    },
-    popup: {
-      text: "",
-      time: 0,
-      duration: 0
-    },
-    shareDialog: {
-      open: false,
-      url: "",
-      type: "",
-      data: {},
-      id: ""
-    },
-    subNav: {
-      type: -1,
-      id: "",
-      data: null
-    },
-    topArtist: "Bedevil by Seb McKinnon",
-    topNav: 0,
-    navIndex: 0,
-    updateState: ""
+const initialRendererState = {
+  archivedCache: {} as Record<string, boolean>,
+  backgroundColor: "rgba(0, 0, 0, 0.25)",
+  backgroundGrpId: 0,
+  backgroundImage: "default",
+  loading: false,
+  noLog: false,
+  offline: false,
+  patreon: {
+    patreon: false,
+    patreonTier: -1
   },
+  syncState: 0,
+  syncToPush: {
+    courses: [] as string[],
+    matches: [] as string[],
+    drafts: [] as string[],
+    economy: [] as string[],
+    seasonal: [] as string[]
+  },
+  popup: {
+    text: "",
+    time: 0,
+    duration: 0
+  },
+  shareDialog: {
+    open: false,
+    url: "",
+    type: "",
+    data: "",
+    id: ""
+  },
+  subNav: {
+    type: -1,
+    id: "",
+    data: {} as {
+      mainDeck: any;
+      sideboard: any;
+      deckTileId: any;
+      name: any;
+      id: any;
+    }
+  },
+  topArtist: "Bedevil by Seb McKinnon",
+  topNav: 0,
+  navIndex: 0,
+  updateState: ""
+};
+
+type RendererState = typeof initialRendererState;
+
+const rendererSlice = createSlice<
+  RendererState,
+  SliceCaseReducers<RendererState>
+>({
+  name: "renderer",
+  initialState: initialRendererState,
   reducers: {
-    setBackgroundColor: (state, action): void => {
+    setBackgroundColor: (state: RendererState, action): void => {
       state.backgroundColor = action.payload;
     },
-    setBackgroundGrpId: (state, action): void => {
+    setBackgroundGrpId: (state: RendererState, action): void => {
       state.backgroundGrpId = action.payload;
     },
-    setBackgroundImage: (state, action): void => {
+    setBackgroundImage: (state: RendererState, action): void => {
       state.backgroundImage = action.payload;
     },
-    setLoading: (state, action): void => {
+    setLoading: (state: RendererState, action): void => {
       state.loading = action.payload;
     },
-    setNoLog: (state, action): void => {
+    setNoLog: (state: RendererState, action): void => {
       state.noLog = action.payload;
     },
-    setOffline: (state, action): void => {
+    setOffline: (state: RendererState, action): void => {
       state.offline = action.payload;
     },
-    setPatreon: (state, action): void => {
+    setPatreon: (state: RendererState, action): void => {
       state.patreon = action.payload;
     },
-    setPopup: (state, action): void => {
+    setPopup: (state: RendererState, action): void => {
       state.popup = action.payload;
     },
-    setShareDialog: (state, action): void => {
+    setShareDialog: (state: RendererState, action): void => {
       state.shareDialog = action.payload;
       state.shareDialog.open = true;
     },
-    setShareDialogOpen: (state, action): void => {
+    setShareDialogOpen: (state: RendererState, action): void => {
       state.shareDialog.open = action.payload;
     },
-    setShareDialogUrl: (state, action): void => {
+    setShareDialogUrl: (state: RendererState, action): void => {
       state.shareDialog.url = action.payload;
     },
-    setSubNav: (state, action): void => {
+    setSubNav: (state: RendererState, action): void => {
       if (action.payload.type == -1) {
         state.navIndex = 0;
       } else {
@@ -87,29 +100,29 @@ const rendererSlice = createSlice({
       }
       state.subNav = action.payload;
     },
-    setTopArtist: (state, action): void => {
+    setTopArtist: (state: RendererState, action): void => {
       state.topArtist = action.payload;
     },
-    setTopNav: (state, action): void => {
+    setTopNav: (state: RendererState, action): void => {
       state.navIndex = 0;
       state.topNav = action.payload;
     },
-    setNavIndex: (state, action): void => {
+    setNavIndex: (state: RendererState, action): void => {
       state.navIndex = action.payload;
     },
-    setUpdateState: (state, action): void => {
+    setUpdateState: (state: RendererState, action): void => {
       state.updateState = action.payload;
     },
-    setArchived: (state, action): void => {
+    setArchived: (state: RendererState, action): void => {
       const { id, archived } = action.payload;
       if (!id) return;
       // update local cache (avoids round trip)
       state.archivedCache[id] = !!archived;
     },
-    setSyncState: (state, action): void => {
+    setSyncState: (state: RendererState, action): void => {
       state.syncState = action.payload;
     },
-    setSyncToPush: (state, action): void => {
+    setSyncToPush: (state: RendererState, action): void => {
       Object.assign(state.syncToPush, action.payload);
     }
   }

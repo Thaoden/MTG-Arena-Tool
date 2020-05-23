@@ -15,8 +15,9 @@ import {
   SETTINGS_ABOUT
 } from "../../shared/constants";
 import { reduxAction } from "../../shared-redux/sharedRedux";
+import { AnyAction, Dispatch } from "redux";
 
-export default function ipcListeners(dispatcher: any): void {
+export default function ipcListeners(dispatcher: Dispatch<AnyAction>): void {
   console.log("Set up IPC listeners.");
 
   ipc.on("prefill_auth_form", (event: IpcRendererEvent, arg: any): void => {

@@ -1,14 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, SliceCaseReducers } from "@reduxjs/toolkit";
 import { InternalMatch } from "../../types/match";
 import globalStore from "../../shared-store";
 
-const matchesSlice = createSlice({
+const initialMatchState = {
+  matchesIndex: [] as string[]
+};
+
+type Matches = typeof initialMatchState;
+
+const matchesSlice = createSlice<Matches, SliceCaseReducers<Matches>>({
   name: "matches",
-  initialState: {
-    matchesIndex: [] as string[]
-  },
+  initialState: initialMatchState,
   reducers: {
-    setMatch: (state, action): void => {
+    setMatch: (state: Matches, action): void => {
       // We send the match along the state but add the match
       // in a separate store. Adding deep/complex objects to redux
       // seems to be highly inneficient and requires using inmutability.
@@ -18,7 +22,7 @@ const matchesSlice = createSlice({
         state.matchesIndex.push(match.id);
       }
     },
-    setManyMatches: (state, action): void => {
+    setManyMatches: (state: Matches, action): void => {
       const newList: string[] = [];
       action.payload.map((match: InternalMatch) => {
         if (state.matchesIndex.indexOf(match.id) === -1) {
