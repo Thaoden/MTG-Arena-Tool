@@ -110,6 +110,10 @@ ipc.on("start_background", async function() {
   appDb.init("application");
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_APPDB",
+      arg: appDb.filePath
+    },
     "SET_APPDB",
     appDb.filePath,
     IPC_RENDERER
@@ -130,6 +134,10 @@ ipc.on("start_background", async function() {
   //reduxAction(globals.store.dispatch, "SET_SETTINGS", appSettings, IPC_ALL ^ IPC_BACKGROUND);
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: appSettings
+    },
     "SET_APP_SETTINGS",
     appSettings,
     IPC_ALL ^ IPC_BACKGROUND
@@ -149,11 +157,24 @@ function offlineLogin(): void {
   loadPlayerConfig();
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: { email: "" }
+    },
     "SET_APP_SETTINGS",
     { email: "" },
     IPC_ALL ^ IPC_BACKGROUND
   );
-  reduxAction(globals.store.dispatch, "SET_OFFLINE", true, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_OFFLINE",
+      arg: true
+    },
+    "SET_OFFLINE",
+    true,
+    IPC_RENDERER
+  );
 }
 
 //
@@ -246,7 +267,16 @@ ipc.on("toggle_deck_archived", function(event, arg) {
   if (!deck) return;
   const deckData: InternalDeck = { ...deck, archived: !deck.archived };
 
-  reduxAction(globals.store.dispatch, "SET_DECK", deckData, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_DECK",
+      arg: deckData
+    },
+    "SET_DECK",
+    deckData,
+    IPC_RENDERER
+  );
   playerDb.upsert("decks", id, deckData);
 });
 
@@ -260,7 +290,16 @@ ipc.on("toggle_archived", function(event, id) {
 
 ipc.on("request_explore", function(event, arg) {
   if (globals.store.getState().appsettings.email === "") {
-    reduxAction(globals.store.dispatch, "SET_OFFLINE", true, IPC_RENDERER);
+    reduxAction(
+      globals.store.dispatch,
+      {
+        type: "SET_OFFLINE",
+        arg: true
+      },
+      "SET_OFFLINE",
+      true,
+      IPC_RENDERER
+    );
   } else {
     httpApi.httpGetExplore(arg);
   }
@@ -272,7 +311,16 @@ ipc.on("request_course", function(event, arg) {
 
 ipc.on("request_home", (event, set) => {
   if (globals.store.getState().appsettings.email === "") {
-    reduxAction(globals.store.dispatch, "SET_OFFLINE", true, IPC_RENDERER);
+    reduxAction(
+      globals.store.dispatch,
+      {
+        type: "SET_OFFLINE",
+        arg: true
+      },
+      "SET_OFFLINE",
+      true,
+      IPC_RENDERER
+    );
   } else {
     httpApi.httpHomeGet(set);
   }
@@ -285,7 +333,16 @@ ipc.on("edit_tag", (event, arg) => {
     [tag]: color
   };
   playerDb.upsert("", "tags_colors", tags);
-  reduxAction(globals.store.dispatch, "EDIT_TAG_COLOR", arg, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "EDIT_TAG_COLOR",
+      arg: arg
+    },
+    "EDIT_TAG_COLOR",
+    arg,
+    IPC_RENDERER
+  );
   //sendSettings();
 });
 
@@ -299,7 +356,16 @@ ipc.on("delete_matches_tag", (event, arg) => {
   tags.splice(tags.indexOf(tag), 1);
   const matchData = { ...match, tags };
 
-  reduxAction(globals.store.dispatch, "SET_MATCH", matchData, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_MATCH",
+      arg: matchData
+    },
+    "SET_MATCH",
+    matchData,
+    IPC_RENDERER
+  );
   playerDb.upsert(matchid, "tags", tags);
 });
 
@@ -312,7 +378,16 @@ ipc.on("add_matches_tag", (event, arg) => {
   const tags = [...(match.tags || []), tag];
   const matchData = { ...match, tags };
 
-  reduxAction(globals.store.dispatch, "SET_MATCH", matchData, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_MATCH",
+      arg: matchData
+    },
+    "SET_MATCH",
+    matchData,
+    IPC_RENDERER
+  );
   playerDb.upsert(matchid, "tags", tags);
   httpApi.httpSetDeckTag(tag, match.oppDeck, match.eventId);
 });
@@ -429,7 +504,16 @@ async function logLoop(): Promise<void> {
 5) Restart Arena.`,
         time: 0
       });
-      reduxAction(globals.store.dispatch, "SET_CAN_LOGIN", false, IPC_RENDERER);
+      reduxAction(
+        globals.store.dispatch,
+        {
+          type: "SET_CAN_LOGIN",
+          arg: false
+        },
+        "SET_CAN_LOGIN",
+        false,
+        IPC_RENDERER
+      );
       detailedLogs = false;
     }
 
@@ -465,12 +549,34 @@ async function logLoop(): Promise<void> {
       text: "Player.log contains no player data",
       time: 0
     });
-    reduxAction(globals.store.dispatch, "SET_CAN_LOGIN", false, IPC_RENDERER);
-    return;
-  } else {
-    reduxAction(globals.store.dispatch, "SET_PLAYER_ID", arenaId, IPC_RENDERER);
     reduxAction(
       globals.store.dispatch,
+      {
+        type: "SET_CAN_LOGIN",
+        arg: false
+      },
+      "SET_CAN_LOGIN",
+      false,
+      IPC_RENDERER
+    );
+    return;
+  } else {
+    reduxAction(
+      globals.store.dispatch,
+      {
+        type: "SET_PLAYER_ID",
+        arg: arenaId
+      },
+      "SET_PLAYER_ID",
+      arenaId,
+      IPC_RENDERER
+    );
+    reduxAction(
+      globals.store.dispatch,
+      {
+        type: "SET_PLAYER_NAME",
+        arg: playerName
+      },
       "SET_PLAYER_NAME",
       playerName,
       IPC_RENDERER
@@ -498,7 +604,16 @@ async function logLoop(): Promise<void> {
     }
   }
 
-  reduxAction(globals.store.dispatch, "SET_CAN_LOGIN", true, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_CAN_LOGIN",
+      arg: true
+    },
+    "SET_CAN_LOGIN",
+    true,
+    IPC_RENDERER
+  );
   ipcSend("prefill_auth_form", {
     username,
     password,

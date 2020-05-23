@@ -51,7 +51,16 @@ export default function setSeasonalRankFromCombinedRank(
   //console.log("SeasonalRankData", newJson);
 
   const newSeasonal = [...seasonalList(), newJson];
-  reduxAction(globals.store.dispatch, "SET_SEASONAL", newJson, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_SEASONAL",
+      arg: newJson
+    },
+    "SET_SEASONAL",
+    newJson,
+    IPC_RENDERER
+  );
   playerDb.upsert("", "seasonal_rank", newSeasonal);
 
   const httpApi = require("./httpApi");

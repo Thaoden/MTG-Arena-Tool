@@ -66,7 +66,16 @@ export function App(): JSX.Element {
   const closeNoLog = React.useCallback(
     (log: string) => {
       setTimeout(() => {
-        reduxAction(dispatch, "SET_NO_LOG", false, IPC_NONE);
+        reduxAction(
+          dispatch,
+          {
+            type: "SET_NO_LOG",
+            arg: false
+          },
+          "SET_NO_LOG",
+          false,
+          IPC_NONE
+        );
         ipcSend("set_log", log);
       }, 350);
     },
@@ -75,7 +84,16 @@ export function App(): JSX.Element {
 
   const closeShare = React.useCallback(() => {
     setTimeout(() => {
-      reduxAction(dispatch, "SET_SHARE_DIALOG_OPEN", false, IPC_NONE);
+      reduxAction(
+        dispatch,
+        {
+          type: "SET_SHARE_DIALOG_OPEN",
+          arg: false
+        },
+        "SET_SHARE_DIALOG_OPEN",
+        false,
+        IPC_NONE
+      );
     }, 350);
   }, [dispatch]);
 

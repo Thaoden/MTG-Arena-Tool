@@ -25,6 +25,10 @@ export default function InDeckGetDeckLists(
 
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_STATIC_DECKS",
+      arg: decks
+    },
     "SET_MANY_STATIC_DECKS",
     decks,
     IPC_RENDERER

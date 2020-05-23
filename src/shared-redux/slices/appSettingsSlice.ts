@@ -19,7 +19,7 @@ const initialAppSettings = {
   logUri: ""
 };
 
-type AppSettings = typeof initialAppSettings;
+export type AppSettings = typeof initialAppSettings;
 
 const settingsSlice = createSlice<AppSettings, SliceCaseReducers<AppSettings>>({
   name: "appsettings",

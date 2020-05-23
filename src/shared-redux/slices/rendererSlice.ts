@@ -53,7 +53,7 @@ const initialRendererState = {
   updateState: ""
 };
 
-type RendererState = typeof initialRendererState;
+export type RendererState = typeof initialRendererState;
 
 const rendererSlice = createSlice<
   RendererState,

@@ -102,7 +102,16 @@ export default function saveMatch(id: string, matchEndTime: number): void {
 
   console.log("Save match:", match);
   const matches_index = [...globals.store.getState().matches.matchesIndex];
-  reduxAction(globals.store.dispatch, "SET_MATCH", match, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_MATCH",
+      arg: match
+    },
+    "SET_MATCH",
+    match,
+    IPC_RENDERER
+  );
   playerDb.upsert("", id, match);
 
   const gameNumberCompleted = currentMatch.gameInfo.results.filter(

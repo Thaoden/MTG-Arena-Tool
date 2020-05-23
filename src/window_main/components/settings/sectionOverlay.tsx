@@ -33,6 +33,10 @@ function toggleEditMode(): void {
 function backgroundColorPicker(color: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { overlay_back_color: color }
+    },
     "SET_SETTINGS",
     { overlay_back_color: color },
     IPC_ALL ^ IPC_RENDERER
@@ -42,6 +46,10 @@ function backgroundColorPicker(color: string): void {
 function setAlwaysOnTop(checked: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { overlay_ontop: checked }
+    },
     "SET_SETTINGS",
     { overlay_ontop: checked },
     IPC_ALL ^ IPC_RENDERER
@@ -51,6 +59,10 @@ function setAlwaysOnTop(checked: boolean): void {
 function setSoundPriority(checked: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { sound_priority: checked }
+    },
     "SET_SETTINGS",
     { sound_priority: checked },
     IPC_ALL ^ IPC_RENDERER
@@ -60,6 +72,10 @@ function setSoundPriority(checked: boolean): void {
 export function setCurrentOverlaySettings(current: number): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { last_settings_overlay_section: current }
+    },
     "SET_SETTINGS",
     { last_settings_overlay_section: current },
     IPC_ALL ^ IPC_RENDERER
@@ -399,6 +415,10 @@ export default function SectionOverlay(): JSX.Element {
     _.debounce((value: number) => {
       reduxAction(
         store.dispatch,
+        {
+          type: "SET_SETTINGS",
+          arg: { overlay_scale: value }
+        },
         "SET_SETTINGS",
         { overlay_scale: value },
         IPC_ALL ^ IPC_RENDERER
@@ -421,6 +441,10 @@ export default function SectionOverlay(): JSX.Element {
 
       reduxAction(
         store.dispatch,
+        {
+          type: "SET_SETTINGS",
+          arg: { sound_priority_volume: value }
+        },
         "SET_SETTINGS",
         { sound_priority_volume: value },
         IPC_ALL ^ IPC_RENDERER

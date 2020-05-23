@@ -13,6 +13,12 @@ export default function addCustomDeck(customDeck: Partial<InternalDeck>): void {
     ...customDeck
   };
 
-  reduxAction(globals.store.dispatch, "SET_DECK", deckData, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    { type: "SET_DECK", arg: deckData },
+    "SET_DECK",
+    deckData,
+    IPC_RENDERER
+  );
   playerDb.upsert("decks", id, deckData);
 }

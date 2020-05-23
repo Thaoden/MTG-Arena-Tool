@@ -11,7 +11,7 @@ const initialHomeState = {
   usersActive: 0
 };
 
-type Home = typeof initialHomeState;
+export type Home = typeof initialHomeState;
 
 const homeSlice = createSlice<Home, SliceCaseReducers<Home>>({
   name: "home",

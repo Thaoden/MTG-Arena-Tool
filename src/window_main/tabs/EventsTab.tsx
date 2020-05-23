@@ -22,6 +22,10 @@ function editTag(tag: string, color: string): void {
 function saveTableState(eventsTableState: TableState<EventTableData>): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { eventsTableState }
+    },
     "SET_SETTINGS",
     { eventsTableState },
     IPC_ALL ^ IPC_RENDERER
@@ -31,6 +35,10 @@ function saveTableState(eventsTableState: TableState<EventTableData>): void {
 function saveTableMode(eventsTableMode: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { eventsTableMode }
+    },
     "SET_SETTINGS",
     { eventsTableMode },
     IPC_ALL ^ IPC_RENDERER

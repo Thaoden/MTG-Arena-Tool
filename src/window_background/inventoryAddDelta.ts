@@ -20,6 +20,10 @@ export default function inventoryAddDelta(
   if (delta.cardsAdded) {
     reduxAction(
       globals.store.dispatch,
+      {
+        type: "ADD_CARDS_LIST",
+        arg: delta.cardsAdded
+      },
       "ADD_CARDS_LIST",
       delta.cardsAdded,
       IPC_RENDERER | IPC_OVERLAY
@@ -29,6 +33,10 @@ export default function inventoryAddDelta(
   }
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_PLAYER_ECONOMY",
+      arg: economy
+    },
     "SET_PLAYER_ECONOMY",
     economy,
     IPC_RENDERER

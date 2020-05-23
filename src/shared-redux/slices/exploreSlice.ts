@@ -43,7 +43,7 @@ const initialExploreState = {
   } as ExploreQuery
 };
 
-type Explore = typeof initialExploreState;
+export type Explore = typeof initialExploreState;
 
 const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
   name: "explore",

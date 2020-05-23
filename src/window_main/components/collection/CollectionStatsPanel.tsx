@@ -105,7 +105,16 @@ export function CollectionStatsPanel({
           options={[ALL_CARDS, SINGLETONS, FULL_SETS]}
           current={countMode}
           callback={(mode: string): void => {
-            reduxAction(dispatch, "SET_COUNT_MODE", mode, IPC_NONE);
+            reduxAction(
+              dispatch,
+              {
+                type: "SET_COUNT_MODE",
+                arg: mode
+              },
+              "SET_COUNT_MODE",
+              mode,
+              IPC_NONE
+            );
           }}
         />
         <SetCompletionBar
@@ -156,6 +165,10 @@ export function CollectionStatsPanel({
               callback={(value: string): void => {
                 reduxAction(
                   dispatch,
+                  {
+                    type: "SET_RARE_DRAFT_FACTOR",
+                    arg: parseFloat(value)
+                  },
                   "SET_RARE_DRAFT_FACTOR",
                   parseFloat(value),
                   IPC_NONE
@@ -175,6 +188,10 @@ export function CollectionStatsPanel({
               callback={(value: string): void => {
                 reduxAction(
                   dispatch,
+                  {
+                    type: "SET_MYTHIC_DRAFT_FACTOR",
+                    arg: parseFloat(value)
+                  },
                   "SET_MYTHIC_DRAFT_FACTOR",
                   parseFloat(value),
                   IPC_NONE
@@ -194,6 +211,10 @@ export function CollectionStatsPanel({
               callback={(value: string): void => {
                 reduxAction(
                   dispatch,
+                  {
+                    type: "SET_BOOSTER_WIN_FACTOR",
+                    arg: parseFloat(value)
+                  },
                   "SET_BOOSTER_WIN_FACTOR",
                   parseFloat(value),
                   IPC_NONE
@@ -213,6 +234,10 @@ export function CollectionStatsPanel({
               callback={(value: string): void => {
                 reduxAction(
                   dispatch,
+                  {
+                    type: "SET_FUTURE_BOOSTERS",
+                    arg: parseFloat(value)
+                  },
                   "SET_FUTURE_BOOSTERS",
                   parseFloat(value),
                   IPC_NONE

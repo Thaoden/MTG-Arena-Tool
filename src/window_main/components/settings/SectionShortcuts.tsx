@@ -16,6 +16,10 @@ import { reduxAction } from "../../../shared-redux/sharedRedux";
 function setKeyboardShortcuts(checked: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { enable_keyboard_shortcuts: checked }
+    },
     "SET_SETTINGS",
     { enable_keyboard_shortcuts: checked },
     IPC_ALL ^ IPC_RENDERER
@@ -43,6 +47,10 @@ function ShortcutsRow({
       setOpenDialog(false);
       reduxAction(
         store.dispatch,
+        {
+          type: "SET_SETTINGS",
+          arg: { ...settings, [code]: key }
+        },
         "SET_SETTINGS",
         { ...settings, [code]: key },
         IPC_ALL ^ IPC_RENDERER

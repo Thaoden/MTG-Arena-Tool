@@ -27,6 +27,10 @@ function getCardStyleName(style: any): string {
 function setCardStyle(style: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { card_tile_style: style }
+    },
     "SET_SETTINGS",
     { card_tile_style: style },
     IPC_ALL ^ IPC_RENDERER
@@ -36,6 +40,10 @@ function setCardStyle(style: string): void {
 function changeBackgroundImage(value: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { back_url: value || "default" }
+    },
     "SET_SETTINGS",
     { back_url: value || "default" },
     IPC_ALL ^ IPC_RENDERER
@@ -45,6 +53,10 @@ function changeBackgroundImage(value: string): void {
 function backColorPicker(color: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { back_color: color }
+    },
     "SET_SETTINGS",
     { back_color: color },
     IPC_ALL ^ IPC_RENDERER
@@ -54,6 +66,10 @@ function backColorPicker(color: string): void {
 function setCardQuality(filter: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { cards_quality: filter }
+    },
     "SET_SETTINGS",
     { cards_quality: filter },
     IPC_ALL ^ IPC_RENDERER
@@ -63,6 +79,10 @@ function setCardQuality(filter: string): void {
 function backShadowCallback(checked: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { back_shadow: checked }
+    },
     "SET_SETTINGS",
     { back_shadow: checked },
     IPC_ALL
@@ -93,6 +113,10 @@ export default function SectionVisual(): JSX.Element {
     _.debounce((value: number) => {
       reduxAction(
         store.dispatch,
+        {
+          type: "SET_SETTINGS",
+          arg: { cards_size_hover_card: value }
+        },
         "SET_SETTINGS",
         { cards_size_hover_card: value },
         IPC_ALL ^ IPC_RENDERER
@@ -115,6 +139,10 @@ export default function SectionVisual(): JSX.Element {
     _.debounce((value: number) => {
       reduxAction(
         store.dispatch,
+        {
+          type: "SET_SETTINGS",
+          arg: { cards_size: value }
+        },
         "SET_SETTINGS",
         { cards_size: value },
         IPC_ALL ^ IPC_RENDERER

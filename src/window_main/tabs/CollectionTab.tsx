@@ -83,6 +83,10 @@ function exportCards(cardIds: string[]): void {
 function saveTableState(collectionTableState: TableState<CardsData>): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { collectionTableState }
+    },
     "SET_SETTINGS",
     { collectionTableState },
     IPC_ALL ^ IPC_RENDERER
@@ -92,6 +96,10 @@ function saveTableState(collectionTableState: TableState<CardsData>): void {
 function saveTableMode(collectionTableMode: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { collectionTableMode }
+    },
     "SET_SETTINGS",
     { collectionTableMode },
     IPC_ALL ^ IPC_RENDERER

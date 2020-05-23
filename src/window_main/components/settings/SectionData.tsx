@@ -55,6 +55,10 @@ function getLanguageName(lang: string): string {
 function setCardsLanguage(filter: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: { metadataLang: filter.toLowerCase() }
+    },
     "SET_APP_SETTINGS",
     {
       metadataLang: filter.toLowerCase()
@@ -66,6 +70,10 @@ function setCardsLanguage(filter: string): void {
 function firstPassCallback(checked: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { skip_firstpass: checked }
+    },
     "SET_SETTINGS",
     { skip_firstpass: checked },
     IPC_ALL ^ IPC_RENDERER
@@ -75,6 +83,10 @@ function firstPassCallback(checked: boolean): void {
 function localeCallback(value: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: { logLocaleFormat: value }
+    },
     "SET_APP_SETTINGS",
     {
       logLocaleFormat: value

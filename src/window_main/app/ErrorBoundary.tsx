@@ -26,9 +26,26 @@ export default class ErrorBoundary extends React.Component<{}, ErrorState> {
 
   closeErrorDialog = (): void => {
     const dispatcher = store.dispatch;
-    reduxAction(dispatcher, "SET_TOPNAV", 0, IPC_NONE);
     reduxAction(
       dispatcher,
+      {
+        type: "SET_TOPNAV",
+        arg: 0
+      },
+      "SET_TOPNAV",
+      0,
+      IPC_NONE
+    );
+    reduxAction(
+      dispatcher,
+      {
+        type: "SET_SUBNAV",
+        arg: {
+          type: -1,
+          id: "",
+          data: null
+        }
+      },
       "SET_SUBNAV",
       {
         type: -1,

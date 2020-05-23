@@ -45,6 +45,10 @@ function deleteTag(matchid: string, tag: string): void {
 function saveTableState(matchesTableState: TableState<MatchTableData>): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { matchesTableState }
+    },
     "SET_SETTINGS",
     { matchesTableState },
     IPC_ALL ^ IPC_RENDERER
@@ -54,6 +58,10 @@ function saveTableState(matchesTableState: TableState<MatchTableData>): void {
 function saveTableMode(matchesTableMode: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { matchesTableMode }
+    },
     "SET_SETTINGS",
     { matchesTableMode },
     IPC_ALL ^ IPC_RENDERER
@@ -163,12 +171,23 @@ export default function MatchesTab({
     (match: InternalMatch): void => {
       reduxAction(
         dispatcher,
+        {
+          type: "SET_BACK_GRPID",
+          arg: match.playerDeck.deckTileId
+        },
         "SET_BACK_GRPID",
         match.playerDeck.deckTileId,
         IPC_NONE
       );
       reduxAction(
         dispatcher,
+        {
+          type: "SET_SUBNAV",
+          arg: {
+            type: SUB_MATCH,
+            id: match.id
+          }
+        },
         "SET_SUBNAV",
         {
           type: SUB_MATCH,

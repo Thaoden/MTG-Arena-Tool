@@ -132,6 +132,13 @@ export function ArchiveArtViewButton(props: ArchiveButtonProps): JSX.Element {
       event.nativeEvent.stopImmediatePropagation();
       reduxAction(
         dispatcher,
+        {
+          type: "SET_ARCHIVED",
+          arg: {
+            id: dataId,
+            archived: !isArchived
+          }
+        },
         "SET_ARCHIVED",
         { id: dataId, archived: !isArchived },
         IPC_NONE

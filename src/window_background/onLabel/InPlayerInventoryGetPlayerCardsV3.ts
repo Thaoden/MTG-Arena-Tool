@@ -18,6 +18,10 @@ export default function InPlayerInventoryGetPlayerCardsV3(entry: Entry): void {
   if (!json) return;
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "ADD_CARDS_KEYS",
+      arg: json
+    },
     "ADD_CARDS_KEYS",
     json,
     IPC_RENDERER | IPC_OVERLAY

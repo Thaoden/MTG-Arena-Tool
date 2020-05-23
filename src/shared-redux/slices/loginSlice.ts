@@ -15,7 +15,7 @@ const initialLoginState = {
   loginState: LOGIN_AUTH
 };
 
-type Login = typeof initialLoginState;
+export type Login = typeof initialLoginState;
 
 const loginSlice = createSlice<Login, SliceCaseReducers<Login>>({
   name: "login",

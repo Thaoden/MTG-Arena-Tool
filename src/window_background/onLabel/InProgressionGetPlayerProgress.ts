@@ -26,6 +26,10 @@ export default function onLabelInProgressionGetPlayerProgress(
   };
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_PLAYER_ECONOMY",
+      arg: economy
+    },
     "SET_PLAYER_ECONOMY",
     economy,
     IPC_RENDERER

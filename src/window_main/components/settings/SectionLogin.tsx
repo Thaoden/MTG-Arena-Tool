@@ -15,6 +15,10 @@ function click(): void {
   };
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: clearAppSettings
+    },
     "SET_APP_SETTINGS",
     clearAppSettings,
     IPC_BACKGROUND

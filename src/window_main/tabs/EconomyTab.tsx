@@ -16,6 +16,10 @@ import { transactionsList } from "../../shared-store";
 function saveTableState(economyTableState: TableState<TransactionData>): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { economyTableState }
+    },
     "SET_SETTINGS",
     { economyTableState },
     IPC_ALL ^ IPC_RENDERER
@@ -25,6 +29,10 @@ function saveTableState(economyTableState: TableState<TransactionData>): void {
 function saveTableMode(economyTableMode: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { economyTableMode }
+    },
     "SET_SETTINGS",
     { economyTableMode },
     IPC_ALL ^ IPC_RENDERER

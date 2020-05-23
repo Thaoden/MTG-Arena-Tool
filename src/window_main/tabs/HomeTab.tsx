@@ -141,6 +141,10 @@ function TopWildcards({ wildcards }: TopWildcardsProps): JSX.Element {
   const hoverCard = (id: number, hover: boolean): void => {
     reduxAction(
       dispatcher,
+      {
+        type: hover ? "SET_HOVER_IN" : "SET_HOVER_OUT",
+        arg: { grpId: id }
+      },
       hover ? "SET_HOVER_IN" : "SET_HOVER_OUT",
       { grpId: id },
       IPC_NONE

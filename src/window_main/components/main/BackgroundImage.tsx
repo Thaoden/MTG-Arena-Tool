@@ -33,6 +33,10 @@ export default function BackgroundImage(): JSX.Element {
       image = getCardArtCrop(backgroundGrpId);
       reduxAction(
         dispatcher,
+        {
+          type: "SET_TOPARTIST",
+          arg: `${card.name} by ${card.artist}`
+        },
         "SET_TOPARTIST",
         `${card.name} by ${card.artist}`,
         IPC_NONE
@@ -42,6 +46,10 @@ export default function BackgroundImage(): JSX.Element {
       image = DEFAULT_BACKGROUND;
       reduxAction(
         dispatcher,
+        {
+          type: "SET_TOPARTIST",
+          arg: "Bedevil by Seb Seb McKinnon"
+        },
         "SET_TOPARTIST",
         "Bedevil by Seb McKinnon",
         IPC_NONE
@@ -64,7 +72,16 @@ export default function BackgroundImage(): JSX.Element {
         xhr.send();
       }
       // We dont know who is the artist..
-      reduxAction(dispatcher, "SET_TOPARTIST", "", IPC_NONE);
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_TOPARTIST",
+          arg: ""
+        },
+        "SET_TOPARTIST",
+        "",
+        IPC_NONE
+      );
     }
     setImage(`url(${image})`);
   }, [backgroundGrpId, backgroundImage, dispatcher]);

@@ -18,6 +18,10 @@ import sha1 from "js-sha1";
 function clickRememberMe(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: { rememberMe: value }
+    },
     "SET_APP_SETTINGS",
     { rememberMe: value },
     IPC_BACKGROUND
@@ -58,9 +62,22 @@ export default function Auth(props: AuthProps): JSX.Element {
     } else {
       setErrorMessage("");
       const pwd = authForm.pass == HIDDEN_PW ? HIDDEN_PW : sha1(authForm.pass);
-      reduxAction(dispatcher, "SET_CAN_LOGIN", false, IPC_NONE);
       reduxAction(
         dispatcher,
+        {
+          type: "SET_CAN_LOGIN",
+          arg: false
+        },
+        "SET_CAN_LOGIN",
+        false,
+        IPC_NONE
+      );
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_APP_SETTINGS",
+          arg: { email: authForm.email }
+        },
         "SET_APP_SETTINGS",
         { email: authForm.email },
         IPC_ALL ^ IPC_RENDERER

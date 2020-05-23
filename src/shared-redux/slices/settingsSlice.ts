@@ -7,7 +7,7 @@ import defaultConfig from "../../shared/defaultConfig";
 
 const initialSettings = { ...defaultConfig.settings };
 
-type Settings = typeof initialSettings;
+export type Settings = typeof initialSettings;
 
 const settingsSlice = createSlice<Settings, SliceCaseReducers<Settings>>({
   name: "settings",

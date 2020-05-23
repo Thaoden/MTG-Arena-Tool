@@ -121,7 +121,16 @@ export function asyncWorker(task: HttpTask, callback: HttpTaskCallback): void {
   const offline = globals.store.getState().renderer.offline;
   if ((!sendData || offline) && !nonPrivacyMethods.includes(task.method)) {
     if (!offline) {
-      reduxAction(globals.store.dispatch, "SET_OFFLINE", true, IPC_RENDERER);
+      reduxAction(
+        globals.store.dispatch,
+        {
+          type: "SET_OFFLINE",
+          arg: true
+        },
+        "SET_OFFLINE",
+        true,
+        IPC_RENDERER
+      );
     }
     const text = `WARNING >> currently offline or settings prohibit sharing > (${task.method})`;
     ipcLog(text);

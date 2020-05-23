@@ -57,7 +57,16 @@ export function isIdle(): boolean {
 }
 
 export function setSyncState(state: number): void {
-  reduxAction(globals.store.dispatch, "SET_SYNC_STATE", state, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_SYNC_STATE",
+      arg: state
+    },
+    "SET_SYNC_STATE",
+    state,
+    IPC_RENDERER
+  );
 }
 
 export function finishSync(): void {
@@ -92,6 +101,10 @@ function syncUserData(data: any): void {
     });
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_EVENTS",
+      arg: coursesList
+    },
     "SET_MANY_EVENTS",
     coursesList,
     IPC_RENDERER
@@ -112,6 +125,10 @@ function syncUserData(data: any): void {
     });
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_MATCHES",
+      arg: matchesList
+    },
     "SET_MANY_MATCHES",
     matchesList,
     IPC_RENDERER
@@ -135,6 +152,10 @@ function syncUserData(data: any): void {
     });
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_ECONOMY",
+      arg: transactionsList
+    },
     "SET_MANY_ECONOMY",
     transactionsList,
     IPC_RENDERER
@@ -156,6 +177,10 @@ function syncUserData(data: any): void {
 
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_DRAFT",
+      arg: draftsList
+    },
     "SET_MANY_DRAFT",
     draftsList,
     IPC_RENDERER
@@ -179,6 +204,10 @@ function syncUserData(data: any): void {
 
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_MANY_SEASONAL",
+      arg: seasonalAdd
+    },
     "SET_MANY_SEASONAL",
     seasonalAdd,
     IPC_RENDERER
@@ -188,6 +217,10 @@ function syncUserData(data: any): void {
     const newTags = data.settings.tags_colors;
     reduxAction(
       globals.store.dispatch,
+      {
+        type: "SET_TAG_COLORS",
+        arg: newTags
+      },
       "SET_TAG_COLORS",
       newTags,
       IPC_RENDERER
@@ -265,7 +298,16 @@ function handleSync(syncIds: SyncIds): void {
       id => syncIds.seasonal.indexOf(id) == -1
     )
   };
-  reduxAction(globals.store.dispatch, "SET_TO_PUSH", toPush, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_TO_PUSH",
+      arg: toPush
+    },
+    "SET_TO_PUSH",
+    toPush,
+    IPC_RENDERER
+  );
   if (
     toPush.courses.length == 0 &&
     toPush.matches.length == 0 &&
@@ -316,6 +358,10 @@ function handleAuthResponse(
   if (error || !parsedResult) {
     reduxAction(
       globals.store.dispatch,
+      {
+        type: "SET_APP_SETTINGS",
+        arg: { token: "", email: "" }
+      },
       "SET_APP_SETTINGS",
       {
         token: "",
@@ -343,6 +389,13 @@ function handleAuthResponse(
   if (appSettings.rememberMe) {
     reduxAction(
       globals.store.dispatch,
+      {
+        type: "SET_APP_SETTINGS",
+        arg: {
+          token: parsedResult.token,
+          email: appSettings.email
+        }
+      },
       "SET_APP_SETTINGS",
       {
         token: parsedResult.token,
@@ -834,6 +887,16 @@ export function httSyncPush(): void {
 
   reduxAction(
     globals.store.dispatch,
+    {
+      type: "SET_TO_PUSH",
+      arg: {
+        matches: [],
+        courses: [],
+        drafts: [],
+        economy: [],
+        seasonal: []
+      }
+    },
     "SET_TO_PUSH",
     {
       matches: [],

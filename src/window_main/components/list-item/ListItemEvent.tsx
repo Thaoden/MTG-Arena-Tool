@@ -151,12 +151,23 @@ function EventSubRows({
     (match: InternalMatch): void => {
       reduxAction(
         dispatcher,
+        {
+          type: "SET_BACK_GRPID",
+          arg: match.playerDeck.deckTileId
+        },
         "SET_BACK_GRPID",
         match.playerDeck.deckTileId,
         IPC_NONE
       );
       reduxAction(
         dispatcher,
+        {
+          type: "SET_SUBNAV",
+          arg: {
+            type: SUB_MATCH,
+            id: match.id
+          }
+        },
         "SET_SUBNAV",
         {
           type: SUB_MATCH,
@@ -172,6 +183,13 @@ function EventSubRows({
     (id: string | number): void => {
       reduxAction(
         dispatcher,
+        {
+          type: "SET_SUBNAV",
+          arg: {
+            type: SUB_DRAFT,
+            id: id
+          }
+        },
         "SET_SUBNAV",
         {
           type: SUB_DRAFT,

@@ -52,10 +52,28 @@ export default function MythicRatingUpdated(entry: Entry): void {
 
   // Rank update / seasonal
   const newSeasonal = [...seasonalList(), newJson];
-  reduxAction(globals.store.dispatch, "SET_SEASONAL", newJson, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_SEASONAL",
+      arg: newJson
+    },
+    "SET_SEASONAL",
+    newJson,
+    IPC_RENDERER
+  );
   playerDb.upsert("", "seasonal", newSeasonal);
 
   // New rank data
-  reduxAction(globals.store.dispatch, "SET_RANK", rank, IPC_RENDERER);
+  reduxAction(
+    globals.store.dispatch,
+    {
+      type: "SET_RANK",
+      arg: rank
+    },
+    "SET_RANK",
+    rank,
+    IPC_RENDERER
+  );
   playerDb.upsert("", "rank", rank);
 }

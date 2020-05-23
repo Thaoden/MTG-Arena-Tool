@@ -26,8 +26,26 @@ export default function ExploreTab(): JSX.Element {
 
   const queryExplore = useCallback(
     (filters: ExploreQuery) => {
-      reduxAction(dispatcher, "SET_LOADING", true, IPC_NONE);
-      reduxAction(dispatcher, "SET_EXPLORE_FILTERS", filters, IPC_NONE);
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_LOADING",
+          arg: true
+        },
+        "SET_LOADING",
+        true,
+        IPC_NONE
+      );
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_EXPLORE_FILTERS",
+          arg: filters
+        },
+        "SET_EXPLORE_FILTERS",
+        filters,
+        IPC_NONE
+      );
       ipcSend("request_explore", filters);
     },
     [dispatcher]
@@ -55,9 +73,26 @@ export default function ExploreTab(): JSX.Element {
         name: row.name,
         id: row._id
       };
-      reduxAction(dispatcher, "SET_BACK_GRPID", row.tile, IPC_NONE);
       reduxAction(
         dispatcher,
+        {
+          type: "SET_BACK_GRPID",
+          arg: row.tile
+        },
+        "SET_BACK_GRPID",
+        row.tile,
+        IPC_NONE
+      );
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_SUBNAV",
+          arg: {
+            type: SUB_DECK,
+            id: row._id + "_",
+            data: deck
+          }
+        },
         "SET_SUBNAV",
         {
           type: SUB_DECK,
@@ -150,7 +185,16 @@ function ExploreFilters(props: ExploreFiltersProps): JSX.Element {
 
   const updateFilters = useCallback(
     (filters: ExploreQuery): void => {
-      reduxAction(dispatcher, "SET_EXPLORE_FILTERS", filters, IPC_NONE);
+      reduxAction(
+        dispatcher,
+        {
+          type: "SET_EXPLORE_FILTERS",
+          arg: filters
+        },
+        "SET_EXPLORE_FILTERS",
+        filters,
+        IPC_NONE
+      );
     },
     [dispatcher]
   );

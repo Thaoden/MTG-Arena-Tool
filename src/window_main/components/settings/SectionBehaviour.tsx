@@ -10,6 +10,12 @@ import { IPC_ALL, IPC_RENDERER } from "../../../shared/constants";
 function clickBetaChannel(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: {
+        betaChannel: value
+      }
+    },
     "SET_APP_SETTINGS",
     {
       betaChannel: value
@@ -21,6 +27,12 @@ function clickBetaChannel(value: boolean): void {
 function clickAutoLogin(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: {
+        autoLogin: value
+      }
+    },
     "SET_APP_SETTINGS",
     {
       autoLogin: value
@@ -32,6 +44,10 @@ function clickAutoLogin(value: boolean): void {
 function clickLaunchToTray(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_APP_SETTINGS",
+      arg: { launchToTray: value }
+    },
     "SET_APP_SETTINGS",
     {
       launchToTray: value
@@ -43,6 +59,10 @@ function clickLaunchToTray(value: boolean): void {
 function clickStartup(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { startup: value }
+    },
     "SET_SETTINGS",
     { startup: value },
     IPC_ALL ^ IPC_RENDERER
@@ -52,6 +72,10 @@ function clickStartup(value: boolean): void {
 function clickCloseOnMatch(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { close_on_match: value }
+    },
     "SET_SETTINGS",
     { close_on_match: value },
     IPC_ALL ^ IPC_RENDERER
@@ -61,6 +85,10 @@ function clickCloseOnMatch(value: boolean): void {
 function clickCloseToTray(value: boolean): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { close_to_tray: value }
+    },
     "SET_SETTINGS",
     { close_to_tray: value },
     IPC_ALL ^ IPC_RENDERER
@@ -70,6 +98,10 @@ function clickCloseToTray(value: boolean): void {
 function changeExportFormat(value: string): void {
   reduxAction(
     store.dispatch,
+    {
+      type: "SET_SETTINGS",
+      arg: { export_format: value }
+    },
     "SET_SETTINGS",
     { export_format: value },
     IPC_ALL ^ IPC_RENDERER

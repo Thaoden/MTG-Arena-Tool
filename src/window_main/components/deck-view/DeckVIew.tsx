@@ -140,8 +140,26 @@ export function DeckView(props: DeckViewProps): JSX.Element {
   const dispatcher = useDispatch();
 
   const goBack = (): void => {
-    reduxAction(dispatcher, "SET_BACK_GRPID", 0, IPC_NONE);
-    reduxAction(dispatcher, "SET_NAV_INDEX", 0, IPC_NONE);
+    reduxAction(
+      dispatcher,
+      {
+        type: "SET_BACK_GRPID",
+        arg: 0
+      },
+      "SET_BACK_GRPID",
+      0,
+      IPC_NONE
+    );
+    reduxAction(
+      dispatcher,
+      {
+        type: "SET_NAV_INDEX",
+        arg: 0
+      },
+      "SET_NAV_INDEX",
+      0,
+      IPC_NONE
+    );
   };
 
   const deckWinratesView = (): void => {
@@ -170,6 +188,13 @@ export function DeckView(props: DeckViewProps): JSX.Element {
     ipcSend("set_clipboard", list);
     reduxAction(
       dispatcher,
+      {
+        type: "SET_POPUP",
+        arg: {
+          text: "Copied to clipboard",
+          time: 2000
+        }
+      },
       "SET_POPUP",
       {
         text: "Copied to clipboard",
