@@ -8,33 +8,49 @@ const initialEconomyState = {
 
 type Economy = typeof initialEconomyState;
 
+const _setEconomy = (
+  state: Economy,
+  action: PayloadAction<InternalEconomyTransaction>
+): void => {
+  const economy = action.payload;
+  globalStore.transactions[economy.id] = { ...economy };
+  if (state.economyIndex.indexOf(economy.id) === -1) {
+    state.economyIndex.push(economy.id);
+  }
+};
+
+const _setManyEconomy = (
+  state: Economy,
+  action: PayloadAction<InternalEconomyTransaction[]>
+): void => {
+  const newList: string[] = [];
+  action.payload.map((economy: InternalEconomyTransaction) => {
+    if (state.economyIndex.indexOf(economy.id) === -1) {
+      globalStore.transactions[economy.id] = economy;
+      newList.push(economy.id);
+    }
+  });
+  state.economyIndex = [...newList, ...state.economyIndex];
+};
+
+type SetEconomyArg = {
+  type: "SET_ECONOMY";
+  arg: Parameters<typeof _setEconomy>[1]["payload"];
+};
+
+type SetManyEconomyArg = {
+  type: "SET_MANY_ECONOMY";
+  arg: Parameters<typeof _setManyEconomy>[1]["payload"];
+};
+
+export type EconomyReducerArgs = SetEconomyArg | SetManyEconomyArg;
+
 const economySlice = createSlice({
   name: "economy",
   initialState: initialEconomyState,
   reducers: {
-    setEconomy: (
-      state: Economy,
-      action: PayloadAction<InternalEconomyTransaction>
-    ): void => {
-      const economy = action.payload;
-      globalStore.transactions[economy.id] = { ...economy };
-      if (state.economyIndex.indexOf(economy.id) === -1) {
-        state.economyIndex.push(economy.id);
-      }
-    },
-    setManyEconomy: (
-      state: Economy,
-      action: PayloadAction<InternalEconomyTransaction[]>
-    ): void => {
-      const newList: string[] = [];
-      action.payload.map((economy: InternalEconomyTransaction) => {
-        if (state.economyIndex.indexOf(economy.id) === -1) {
-          globalStore.transactions[economy.id] = economy;
-          newList.push(economy.id);
-        }
-      });
-      state.economyIndex = [...newList, ...state.economyIndex];
-    }
+    setEconomy: _setEconomy,
+    setManyEconomy: _setManyEconomy
   }
 });
 

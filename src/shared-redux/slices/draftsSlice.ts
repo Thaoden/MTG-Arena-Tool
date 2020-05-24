@@ -8,30 +8,49 @@ const initialDraftsState = {
 
 type Drafts = typeof initialDraftsState;
 
+const _setDraft = (
+  state: Drafts,
+  action: PayloadAction<InternalDraft>
+): void => {
+  const draft = action.payload;
+  globalStore.drafts[draft.id] = { ...draft };
+  if (state.draftsIndex.indexOf(draft.id) === -1) {
+    state.draftsIndex.push(draft.id);
+  }
+};
+
+const _setManyDrafts = (
+  state: Drafts,
+  action: PayloadAction<InternalDraft[]>
+): void => {
+  const newList: string[] = [];
+  action.payload.map((draft: InternalDraft) => {
+    if (state.draftsIndex.indexOf(draft.id) === -1) {
+      globalStore.drafts[draft.id] = draft;
+      newList.push(draft.id);
+    }
+  });
+  state.draftsIndex = [...newList, ...state.draftsIndex];
+};
+
+type SetDraftArg = {
+  type: "SET_DRAFT";
+  arg: Parameters<typeof _setDraft>[1]["payload"];
+};
+
+type SetManyDraftArg = {
+  type: "SET_MANY_DRAFT";
+  arg: Parameters<typeof _setManyDrafts>[1]["payload"];
+};
+
+export type DraftReducerArgs = SetDraftArg | SetManyDraftArg;
+
 const draftsSlice = createSlice({
   name: "drafts",
   initialState: initialDraftsState,
   reducers: {
-    setDraft: (state: Drafts, action: PayloadAction<InternalDraft>): void => {
-      const draft = action.payload;
-      globalStore.drafts[draft.id] = { ...draft };
-      if (state.draftsIndex.indexOf(draft.id) === -1) {
-        state.draftsIndex.push(draft.id);
-      }
-    },
-    setManyDrafts: (
-      state: Drafts,
-      action: PayloadAction<InternalDraft[]>
-    ): void => {
-      const newList: string[] = [];
-      action.payload.map((draft: InternalDraft) => {
-        if (state.draftsIndex.indexOf(draft.id) === -1) {
-          globalStore.drafts[draft.id] = draft;
-          newList.push(draft.id);
-        }
-      });
-      state.draftsIndex = [...newList, ...state.draftsIndex];
-    }
+    setDraft: _setDraft,
+    setManyDrafts: _setManyDrafts
   }
 });
 

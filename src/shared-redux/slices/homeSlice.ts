@@ -7,7 +7,17 @@ const initialHomeState = {
   usersActive: 0
 };
 
-export type Home = typeof initialHomeState;
+type Home = typeof initialHomeState;
+
+const _setHomeData = (state: Home, action: PayloadAction<Home>): Home =>
+  action.payload;
+
+type SetHomeDataArg = {
+  type: "SET_HOME_DATA";
+  arg: Parameters<typeof _setHomeData>[1]["payload"];
+};
+
+export type HomeReducerArgs = SetHomeDataArg;
 
 const homeSlice = createSlice({
   name: "home",

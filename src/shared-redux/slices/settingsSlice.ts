@@ -18,10 +18,12 @@ const settingsSlice = createSlice({
   reducers: { setSettings: _setSettings }
 });
 
-export type SetSettingsArg = {
+type SetSettingsArg = {
   type: "SET_SETTINGS";
   arg: Parameters<typeof _setSettings>[1]["payload"];
 };
+
+export type SettingsReducerArgs = SetSettingsArg;
 
 export const { setSettings } = settingsSlice.actions;
 export default settingsSlice;
