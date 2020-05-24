@@ -513,7 +513,7 @@ const actions: Record<
   SET_SEASONAL: SeasonalSlice.setSeasonal,
   SET_MANY_SEASONAL: SeasonalSlice.setManySeasonal,
   SET_DECK_CHANGE: DeckChangesSlice.setChange,
-  SET_MANY_DECK_CHANGES: DeckChangesSlice.setManyChangees
+  SET_MANY_DECK_CHANGES: DeckChangesSlice.setManyChanges
 };
 
 export default actions;
