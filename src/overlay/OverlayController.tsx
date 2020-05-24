@@ -131,8 +131,6 @@ export default function OverlayController(): JSX.Element {
           type: "SET_SETTINGS",
           arg: { overlays: newOverlays, overlayHover: newOverlayHover }
         },
-        "SET_SETTINGS",
-        { overlays: newOverlays, overlayHover: newOverlayHover },
         IPC_ALL ^ IPC_OVERLAY
       );
     }
@@ -170,8 +168,6 @@ export default function OverlayController(): JSX.Element {
         type: "SET_SETTINGS",
         arg: { overlays: newOverlays }
       },
-      "SET_SETTINGS",
-      { overlays: newOverlays },
       IPC_ALL ^ IPC_OVERLAY
     );
   };

@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { WildcardsChange } from "../../window_main/tabs/HomeTab";
 
 const initialHomeState = {
@@ -13,7 +9,7 @@ const initialHomeState = {
 
 export type Home = typeof initialHomeState;
 
-const homeSlice = createSlice<Home, SliceCaseReducers<Home>>({
+const homeSlice = createSlice({
   name: "home",
   initialState: initialHomeState,
   reducers: {

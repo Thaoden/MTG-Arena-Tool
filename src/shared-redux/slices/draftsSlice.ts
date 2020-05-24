@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalDraft } from "../../types/draft";
 
@@ -12,7 +8,7 @@ const initialDraftsState = {
 
 type Drafts = typeof initialDraftsState;
 
-const draftsSlice = createSlice<Drafts, SliceCaseReducers<Drafts>>({
+const draftsSlice = createSlice({
   name: "drafts",
   initialState: initialDraftsState,
   reducers: {

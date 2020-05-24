@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialHover = {
   grpId: 0,
@@ -12,7 +8,7 @@ const initialHover = {
 
 type Hover = typeof initialHover;
 
-const hoverSlice = createSlice<Hover, SliceCaseReducers<Hover>>({
+const hoverSlice = createSlice({
   name: "hover",
   initialState: initialHover,
   reducers: {

@@ -209,8 +209,6 @@ function onLogEntryFound(entry: any): void {
                 type: "SET_APP_SETTINGS",
                 arg: { logTimeExample: timestamp, logTimeFormat: format }
               },
-              "SET_APP_SETTINGS",
-              { logTimeExample: timestamp, logTimeFormat: format },
               IPC_RENDERER
             );
           }
@@ -431,8 +429,6 @@ function finishLoading(): void {
         type: "SET_LOADING",
         arg: false
       },
-      "SET_LOADING",
-      false,
       IPC_RENDERER
     );
     reduxAction(
@@ -441,8 +437,6 @@ function finishLoading(): void {
         type: "SET_LOGIN_STATE",
         arg: LOGIN_OK
       },
-      "SET_LOGIN_STATE",
-      LOGIN_OK,
       IPC_RENDERER
     );
 

@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalEconomyTransaction } from "../../types/inventory";
 
@@ -12,7 +8,7 @@ const initialEconomyState = {
 
 type Economy = typeof initialEconomyState;
 
-const economySlice = createSlice<Economy, SliceCaseReducers<Economy>>({
+const economySlice = createSlice({
   name: "economy",
   initialState: initialEconomyState,
   reducers: {

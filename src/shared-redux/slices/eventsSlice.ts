@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { InternalEvent } from "../../types/event";
 
@@ -12,7 +8,7 @@ const initialEventsState = {
 
 type Events = typeof initialEventsState;
 
-const eventsSlice = createSlice<Events, SliceCaseReducers<Events>>({
+const eventsSlice = createSlice({
   name: "events",
   initialState: initialEventsState,
   reducers: {

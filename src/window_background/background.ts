@@ -114,8 +114,6 @@ ipc.on("start_background", async function() {
       type: "SET_APPDB",
       arg: appDb.filePath
     },
-    "SET_APPDB",
-    appDb.filePath,
     IPC_RENDERER
   );
 

@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialAppSettings = {
   email: "",
@@ -21,13 +17,13 @@ const initialAppSettings = {
 
 export type AppSettings = typeof initialAppSettings;
 
-const settingsSlice = createSlice<AppSettings, SliceCaseReducers<AppSettings>>({
+const settingsSlice = createSlice({
   name: "appsettings",
   initialState: initialAppSettings,
   reducers: {
     setAppSettings: (
       state: AppSettings,
-      action: PayloadAction<AppSettings>
+      action: PayloadAction<Partial<AppSettings>>
     ): void => {
       Object.assign(state, action.payload);
     }

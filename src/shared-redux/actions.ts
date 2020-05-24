@@ -15,361 +15,355 @@ import * as DraftsSlice from "./slices/draftsSlice";
 import * as SeasonalSlice from "./slices/seasonalSlice";
 import * as DeckChangesSlice from "./slices/deckChangesSlice";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
-import { InternalMatch } from "../types/match";
-import { InternalEvent } from "../types/event";
-import { InternalDeck, DeckChange } from "../types/Deck";
-import { InternalEconomyTransaction } from "../types/inventory";
-import { InternalDraft } from "../types/draft";
-import { SeasonalRankData } from "../types/Season";
 
 type SetSettingsArg = {
   type: "SET_SETTINGS";
-  arg: SettingsSlice.Settings;
+  arg: Parameters<typeof SettingsSlice.setSettings>[0];
 };
 
 type SetAppSettingsArg = {
   type: "SET_APP_SETTINGS";
-  arg: AppSettingsSlice.AppSettings;
+  arg: Parameters<typeof AppSettingsSlice.setAppSettings>[0];
 };
 
 type SetArchivedSettingsArg = {
   type: "SET_ARCHIVED";
-  arg: { id: string; archived: boolean };
+  arg: Parameters<typeof RendererSlice.setArchived>[0];
 };
 
 type SetBackColorArg = {
   type: "SET_BACK_COLOR";
-  arg: string;
+  arg: Parameters<typeof RendererSlice.setBackgroundColor>[0];
 };
 
 type SetBackGrpIdArg = {
   type: "SET_BACK_GRPID";
-  arg: number;
+  arg: Parameters<typeof RendererSlice.setBackgroundGrpId>[0];
 };
 
 type SetBackImageArg = {
   type: "SET_BACK_IMAGE";
-  arg: string;
+  arg: Parameters<typeof RendererSlice.setBackgroundImage>[0];
 };
 
 type SetLoadingArg = {
   type: "SET_LOADING";
-  arg: boolean;
+  arg: Parameters<typeof RendererSlice.setLoading>[0];
 };
 
 type SetNoLogArg = {
   type: "SET_NO_LOG";
-  arg: boolean;
+  arg: Parameters<typeof RendererSlice.setNoLog>[0];
 };
 
 type SetOfflineArg = {
   type: "SET_OFFLINE";
-  arg: boolean;
+  arg: Parameters<typeof RendererSlice.setOffline>[0];
 };
 
 type SetPatreonArg = {
   type: "SET_PATREON";
-  arg: RendererSlice.RendererState["patreon"];
+  arg: Parameters<typeof RendererSlice.setPatreon>[0];
 };
 
 type SetPopupArg = {
   type: "SET_POPUP";
-  arg: RendererSlice.RendererState["popup"];
+  arg: Parameters<typeof RendererSlice.setPopup>[0];
 };
 
 type SetShareDialogArg = {
   type: "SET_SHARE_DIALOG";
-  arg: RendererSlice.RendererState["shareDialog"];
+  arg: Parameters<typeof RendererSlice.setShareDialog>[0];
 };
 
 type SetShareDialogOpenArg = {
   type: "SET_SHARE_DIALOG_OPEN";
-  arg: boolean;
+  arg: Parameters<typeof RendererSlice.setShareDialogOpen>[0];
 };
 
 type SetShareDialogUrl = {
   type: "SET_SHARE_DIALOG_URL";
-  arg: string;
+  arg: Parameters<typeof RendererSlice.setShareDialogUrl>[0];
 };
 
 type SetNavIndexArg = {
   type: "SET_NAV_INDEX";
-  arg: number;
+  arg: Parameters<typeof RendererSlice.setNavIndex>[0];
 };
 
 type SetSubnavArg = {
   type: "SET_SUBNAV";
-  arg: RendererSlice.RendererState["subNav"];
+  arg: Parameters<typeof RendererSlice.setSubNav>[0];
 };
 
 type SetTopArtistArg = {
   type: "SET_TOPARTIST";
-  arg: string;
+  arg: Parameters<typeof RendererSlice.setTopArtist>[0];
 };
 
 type SetTopnavArg = {
   type: "SET_TOPNAV";
-  arg: number;
+  arg: Parameters<typeof RendererSlice.setTopNav>[0];
 };
 
 type SetUpdateStateArg = {
   type: "SET_UPDATE_STATE";
-  arg: string;
+  arg: Parameters<typeof RendererSlice.setUpdateState>[0];
 };
 
 type SetSyncStateArg = {
   type: "SET_SYNC_STATE";
-  arg: number;
+  arg: Parameters<typeof RendererSlice.setSyncState>[0];
 };
 
 type SetToPushArg = {
   type: "SET_TO_PUSH";
-  arg: RendererSlice.RendererState["syncToPush"];
+  arg: Parameters<typeof RendererSlice.setSyncToPush>[0];
 };
 
 type SetHoverInArg = {
   type: "SET_HOVER_IN";
-  arg: { grpId: number; wanted: number };
+  arg: Parameters<typeof HoverSlice.setHoverIn>[0];
 };
 
 type SetHoverOutArg = {
   type: "SET_HOVER_OUT";
-  arg: never;
+  arg: Parameters<typeof HoverSlice.setHoverOut>;
 };
 
 type SetCanLoginArg = {
   type: "SET_CAN_LOGIN";
-  arg: boolean;
+  arg: Parameters<typeof LoginSlice.setCanLogin>[0];
 };
 
 type SetLoginEmailArg = {
   type: "SET_LOGIN_EMAIL";
-  arg: string;
+  arg: Parameters<typeof LoginSlice.setLoginEmail>[0];
 };
 
 type SetLoginFormArg = {
   type: "SET_LOGIN_FORM";
-  arg: LoginSlice.Login["loginForm"];
+  arg: Parameters<typeof LoginSlice.setLoginForm>[0];
 };
 
 type SetLoginPasswordArg = {
   type: "SET_LOGIN_PASSWORD";
-  arg: string;
+  arg: Parameters<typeof LoginSlice.setLoginPassword>[0];
 };
 
 type SetLoginRememberArg = {
   type: "SET_LOGIN_REMEMBER";
-  arg: boolean;
+  arg: Parameters<typeof LoginSlice.setLoginRemember>[0];
 };
 
 type SetLoginStateArg = {
   type: "SET_LOGIN_STATE";
-  arg: 1 | 2 | 3 | 4;
+  arg: Parameters<typeof LoginSlice.setLoginState>[0];
 };
 
 type SetHomeDataArg = {
   type: "SET_HOME_DATA";
-  arg: HomeSlice.Home;
+  arg: Parameters<typeof HomeSlice.setHomeData>[0];
 };
 
 type SetBoosterWinFactorArg = {
   type: "SET_BOOSTER_WIN_FACTOR";
-  arg: number;
+  arg: Parameters<typeof CollectionSlice.setBoosterWinFactor>[0];
 };
 
 type SetCountModeArg = {
   type: "SET_COUNT_MODE";
-  arg: string;
+  arg: Parameters<typeof CollectionSlice.setCountMode>[0];
 };
 
 type SetFutureBoostersArg = {
   type: "SET_FUTURE_BOOSTERS";
-  arg: number;
+  arg: Parameters<typeof CollectionSlice.setFutureBoosters>[0];
 };
 
 type SetMythicDraftFactorArg = {
   type: "SET_MYTHIC_DRAFT_FACTOR";
-  arg: number;
+  arg: Parameters<typeof CollectionSlice.setMythicDraftFactor>[0];
 };
 
 type SetRareDraftFactorArg = {
   type: "SET_RARE_DRAFT_FACTOR";
-  arg: number;
+  arg: Parameters<typeof CollectionSlice.setRareDraftFactor>[0];
 };
 
 type SetActiveEventsArg = {
   type: "SET_ACTIVE_EVENTS";
-  arg: string;
+  arg: Parameters<typeof ExploreSlice.setActiveEvents>[0];
 };
 
 type SetExploreDataArg = {
   type: "SET_EXPLORE_DATA";
-  arg: ExploreSlice.Explore["data"];
+  arg: Parameters<typeof ExploreSlice.setExploreData>[0];
 };
 
 type SetExploreFiltersArg = {
   type: "SET_EXPLORE_FILTERS";
-  arg: ExploreSlice.ExploreQuery;
+  arg: Parameters<typeof ExploreSlice.setExploreFilters>[0];
 };
 
 type SetExploreFiltersSkipArg = {
   type: "SET_EXPLORE_FILTERS_SKIP";
-  arg: number;
+  arg: Parameters<typeof ExploreSlice.setExploreFiltersSkip>[0];
 };
 
 type SetMatchArg = {
   type: "SET_MATCH";
-  arg: InternalMatch;
+  arg: Parameters<typeof MatchesSlice.setMatch>[0];
 };
 
 type SetManyMatchesArg = {
   type: "SET_MANY_MATCHES";
-  arg: InternalMatch[];
+  arg: Parameters<typeof MatchesSlice.setManyMatches>[0];
 };
 
 type SetEventArg = {
   type: "SET_EVENT";
-  arg: InternalEvent;
+  arg: Parameters<typeof EventsSlice.setEvent>[0];
 };
 
 type SetManyEventsArg = {
   type: "SET_MANY_EVENTS";
-  arg: InternalEvent[];
+  arg: Parameters<typeof EventsSlice.setManyEvents>[0];
 };
 
 type SetPlayerDbArg = {
   type: "SET_PLAYERDB";
-  arg: string;
+  arg: Parameters<typeof PlayerDataSlice.setPlayerDb>[0];
 };
 
 type SetAppdbArg = {
   type: "SET_APPDB";
-  arg: string;
+  arg: Parameters<typeof PlayerDataSlice.setAppDb>[0];
 };
 
 type SetPlayerIdArg = {
   type: "SET_PLAYER_ID";
-  arg: string;
+  arg: Parameters<typeof PlayerDataSlice.setPlayerId>[0];
 };
 
 type SetPlayerNameArg = {
   type: "SET_PLAYER_NAME";
-  arg: string;
+  arg: Parameters<typeof PlayerDataSlice.setPlayerName>[0];
 };
 
 type SetArenaVersionArg = {
   type: "SET_ARENA_VERSION";
-  arg: string;
+  arg: Parameters<typeof PlayerDataSlice.setArenaVersion>[0];
 };
 
 type SetPlayerEconomyArg = {
   type: "SET_PLAYER_ECONOMY";
-  arg: PlayerDataSlice.PlayerData["economy"];
+  arg: Parameters<typeof PlayerDataSlice.setEconomy>[0];
 };
 
 type SetTagColorsArg = {
   type: "SET_TAG_COLORS";
-  arg: Record<string, string>;
+  arg: Parameters<typeof PlayerDataSlice.setTagColors>[0];
 };
 
 type EditTagColorArg = {
   type: "EDIT_TAG_COLOR";
-  arg: { tag: string; color: string };
+  arg: Parameters<typeof PlayerDataSlice.editTagColor>[0];
 };
 
 type SetRankArg = {
   type: "SET_RANK";
-  arg: PlayerDataSlice.PlayerData["rank"];
+  arg: Parameters<typeof PlayerDataSlice.setRank>[0];
 };
 
 type AddCardArg = {
   type: "ADD_CARD";
-  arg: number;
+  arg: Parameters<typeof PlayerDataSlice.addCard>[0];
 };
 
 type AddCardsListArg = {
   type: "ADD_CARDS_LIST";
-  arg: number[];
+  arg: Parameters<typeof PlayerDataSlice.addCardsList>[0];
 };
 
 type AddCardsKeysArg = {
   type: "ADD_CARDS_KEYS";
-  arg: { [grpId: string]: number };
+  arg: Parameters<typeof PlayerDataSlice.addCardsKeys>[0];
 };
 
 type AddCardsFromStoreArg = {
   type: "ADD_CARDS_FROM_STORE";
-  arg: any;
+  arg: Parameters<typeof PlayerDataSlice.addCardsFromStore>[0];
 };
 
 type RemoveDeckTagArg = {
   type: "REMOVE_DECK_TAG";
-  arg: { tag: string; deck: string };
+  arg: Parameters<typeof PlayerDataSlice.removeDeckTag>[0];
 };
 
 type AddDeckTagArg = {
   type: "ADD_DECK_TAG";
-  arg: { tag: string; deck: string };
+  arg: Parameters<typeof PlayerDataSlice.addDeckTag>[0];
 };
 
 type SetDeckTagsArg = {
   type: "SET_DECK_TAGS";
-  arg: Record<string, string[]>;
+  arg: Parameters<typeof PlayerDataSlice.setDeckTags>[0];
 };
 
 type SetDeckArg = {
   type: "SET_DECK";
-  arg: InternalDeck;
+  arg: Parameters<typeof DecksSlice.setDeck>[0];
 };
 
 type SetManyDecksArg = {
   type: "SET_MANY_DECKS";
-  arg: InternalDeck[];
+  arg: Parameters<typeof DecksSlice.setManyDecks>[0];
 };
 
 type SetManyStaticDecksArg = {
   type: "SET_MANY_STATIC_DECKS";
-  arg: InternalDeck[];
+  arg: Parameters<typeof DecksSlice.setManyStaticDecks>[0];
 };
 
 type SetEconomyArg = {
   type: "SET_ECONOMY";
-  arg: InternalEconomyTransaction;
+  arg: Parameters<typeof EconomySlice.setEconomy>[0];
 };
 
 type SetManyEconomyArg = {
   type: "SET_MANY_ECONOMY";
-  arg: InternalEconomyTransaction[];
+  arg: Parameters<typeof EconomySlice.setManyEconomy>[0];
 };
 
 type SetDraftArg = {
   type: "SET_DRAFT";
-  arg: InternalDraft;
+  arg: Parameters<typeof DraftsSlice.setDraft>[0];
 };
 
 type SetManyDraftArg = {
   type: "SET_MANY_DRAFT";
-  arg: InternalDraft[];
+  arg: Parameters<typeof DraftsSlice.setManyDrafts>[0];
 };
 
 type SetSeasonalArg = {
   type: "SET_SEASONAL";
-  arg: SeasonalRankData;
+  arg: Parameters<typeof SeasonalSlice.setSeasonal>[0];
 };
 
 type SetManySeasonalArg = {
   type: "SET_MANY_SEASONAL";
-  arg: SeasonalRankData[];
+  arg: Parameters<typeof SeasonalSlice.setManySeasonal>[0];
 };
 
 type SetDeckChangeArg = {
   type: "SET_DECK_CHANGE";
-  arg: DeckChange;
+  arg: Parameters<typeof DeckChangesSlice.setChange>[0];
 };
 
 type SetManyDeckChangesArg = {
   type: "SET_MANY_DECK_CHANGES";
-  arg: DeckChange[];
+  arg: Parameters<typeof DeckChangesSlice.setManyChanges>[0];
 };
 
 export type ActionsArg =

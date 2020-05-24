@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialCollectionState = {
   countMode: "All cards",
@@ -14,7 +10,7 @@ const initialCollectionState = {
 
 type Collection = typeof initialCollectionState;
 
-const collectionSlice = createSlice<Collection, SliceCaseReducers<Collection>>({
+const collectionSlice = createSlice({
   name: "collection",
   initialState: initialCollectionState,
   reducers: {

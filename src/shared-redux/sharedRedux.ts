@@ -86,8 +86,6 @@ export function initializeRendererReduxIPC(store: EnhancedStore): void {
 export function reduxAction(
   dispatch: Dispatch<AnyAction>,
   actionArg: ActionsArg,
-  type: Actions,
-  arg: any,
   to: number
 ): void {
   dispatch(actions[actionArg.type](actionArg.arg));

@@ -1,6 +1,5 @@
 import {
   createSlice,
-  SliceCaseReducers,
   PayloadAction
 } from "@reduxjs/toolkit";
 import { SeasonalRankData } from "../../types/Season";
@@ -12,7 +11,7 @@ const initialSeasonalState = {
 
 type Seasonal = typeof initialSeasonalState;
 
-const seasonalSlice = createSlice<Seasonal, SliceCaseReducers<Seasonal>>({
+const seasonalSlice = createSlice({
   name: "seasonal",
   initialState: initialSeasonalState,
   reducers: {

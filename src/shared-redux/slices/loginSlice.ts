@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOGIN_AUTH } from "../../shared/constants";
 
 const initialLoginState = {
@@ -17,7 +13,7 @@ const initialLoginState = {
 
 export type Login = typeof initialLoginState;
 
-const loginSlice = createSlice<Login, SliceCaseReducers<Login>>({
+const loginSlice = createSlice({
   name: "login",
   initialState: initialLoginState,
   reducers: {

@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InternalMatch } from "../../types/match";
 import globalStore from "../../shared-store";
 
@@ -12,7 +8,7 @@ const initialMatchState = {
 
 type Matches = typeof initialMatchState;
 
-const matchesSlice = createSlice<Matches, SliceCaseReducers<Matches>>({
+const matchesSlice = createSlice({
   name: "matches",
   initialState: initialMatchState,
   reducers: {

@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import globalStore from "../../shared-store";
 import { DeckChange } from "../../types/Deck";
 
@@ -12,10 +8,7 @@ const initialDeckChangesState = {
 
 type DeckChanges = typeof initialDeckChangesState;
 
-const deckChangesSlice = createSlice<
-  DeckChanges,
-  SliceCaseReducers<DeckChanges>
->({
+const deckChangesSlice = createSlice({
   name: "deckChanges",
   initialState: initialDeckChangesState,
   reducers: {
@@ -29,7 +22,7 @@ const deckChangesSlice = createSlice<
         state.deckChangesIndex.push(change.id);
       }
     },
-    setManyChangees: (
+    setManyChanges: (
       state: DeckChanges,
       action: PayloadAction<DeckChange[]>
     ): void => {
@@ -45,6 +38,6 @@ const deckChangesSlice = createSlice<
   }
 });
 
-export const { setChange, setManyChangees } = deckChangesSlice.actions;
+export const { setChange, setManyChanges } = deckChangesSlice.actions;
 
 export default deckChangesSlice;

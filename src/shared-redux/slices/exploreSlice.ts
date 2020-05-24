@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ExploreQuery {
   filterWCC: string;
@@ -45,7 +41,7 @@ const initialExploreState = {
 
 export type Explore = typeof initialExploreState;
 
-const exploreSlice = createSlice<Explore, SliceCaseReducers<Explore>>({
+const exploreSlice = createSlice({
   name: "explore",
   initialState: initialExploreState,
   reducers: {

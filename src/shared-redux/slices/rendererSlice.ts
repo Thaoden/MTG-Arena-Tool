@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialRendererState = {
   archivedCache: {} as Record<string, boolean>,
@@ -55,10 +51,7 @@ const initialRendererState = {
 
 export type RendererState = typeof initialRendererState;
 
-const rendererSlice = createSlice<
-  RendererState,
-  SliceCaseReducers<RendererState>
->({
+const rendererSlice = createSlice({
   name: "renderer",
   initialState: initialRendererState,
   reducers: {

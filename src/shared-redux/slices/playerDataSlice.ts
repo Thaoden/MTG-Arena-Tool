@@ -1,8 +1,4 @@
-import {
-  createSlice,
-  SliceCaseReducers,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { differenceInDays } from "date-fns";
 
 const playerDataState = {
@@ -71,7 +67,7 @@ const incrementCardCount = (state: PlayerData, grpId: number): void => {
   state.cardsNew[grpId] = state.cardsNew[grpId] + 1 || 1;
 };
 
-const playerDataSlice = createSlice<PlayerData, SliceCaseReducers<PlayerData>>({
+const playerDataSlice = createSlice({
   name: "playerdata",
   initialState: playerDataState,
   reducers: {
