@@ -89,7 +89,6 @@ export function reduxAction(
   to: number
 ): void {
   dispatch(actions[actionArg.type](actionArg.arg));
-  //dispatch(actions[type](arg));
   if (to !== IPC_NONE) {
     ipcRenderer.send(
       "redux-action",
@@ -97,6 +96,5 @@ export function reduxAction(
       JSON.stringify(actionArg.arg),
       to
     );
-    //ipcRenderer.send("redux-action", type, JSON.stringify(arg), to);
   }
 }

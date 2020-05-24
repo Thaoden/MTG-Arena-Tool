@@ -15,20 +15,27 @@ const initialAppSettings = {
   logUri: ""
 };
 
-export type AppSettings = typeof initialAppSettings;
+type AppSettings = typeof initialAppSettings;
+
+const _setAppSettings = (
+  state: AppSettings,
+  action: PayloadAction<Partial<AppSettings>>
+): void => {
+  Object.assign(state, action.payload);
+};
 
 const settingsSlice = createSlice({
   name: "appsettings",
   initialState: initialAppSettings,
   reducers: {
-    setAppSettings: (
-      state: AppSettings,
-      action: PayloadAction<Partial<AppSettings>>
-    ): void => {
-      Object.assign(state, action.payload);
-    }
+    setAppSettings: _setAppSettings
   }
 });
+
+export type SetAppSettingsArg = {
+  type: "SET_APP_SETTINGS";
+  arg: Parameters<typeof _setAppSettings>[1]["payload"];
+};
 
 export const { setAppSettings } = settingsSlice.actions;
 export default settingsSlice;

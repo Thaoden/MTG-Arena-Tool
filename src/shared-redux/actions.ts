@@ -16,111 +16,6 @@ import * as SeasonalSlice from "./slices/seasonalSlice";
 import * as DeckChangesSlice from "./slices/deckChangesSlice";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-type SetSettingsArg = {
-  type: "SET_SETTINGS";
-  arg: Parameters<typeof SettingsSlice.setSettings>[0];
-};
-
-type SetAppSettingsArg = {
-  type: "SET_APP_SETTINGS";
-  arg: Parameters<typeof AppSettingsSlice.setAppSettings>[0];
-};
-
-type SetArchivedSettingsArg = {
-  type: "SET_ARCHIVED";
-  arg: Parameters<typeof RendererSlice.setArchived>[0];
-};
-
-type SetBackColorArg = {
-  type: "SET_BACK_COLOR";
-  arg: Parameters<typeof RendererSlice.setBackgroundColor>[0];
-};
-
-type SetBackGrpIdArg = {
-  type: "SET_BACK_GRPID";
-  arg: Parameters<typeof RendererSlice.setBackgroundGrpId>[0];
-};
-
-type SetBackImageArg = {
-  type: "SET_BACK_IMAGE";
-  arg: Parameters<typeof RendererSlice.setBackgroundImage>[0];
-};
-
-type SetLoadingArg = {
-  type: "SET_LOADING";
-  arg: Parameters<typeof RendererSlice.setLoading>[0];
-};
-
-type SetNoLogArg = {
-  type: "SET_NO_LOG";
-  arg: Parameters<typeof RendererSlice.setNoLog>[0];
-};
-
-type SetOfflineArg = {
-  type: "SET_OFFLINE";
-  arg: Parameters<typeof RendererSlice.setOffline>[0];
-};
-
-type SetPatreonArg = {
-  type: "SET_PATREON";
-  arg: Parameters<typeof RendererSlice.setPatreon>[0];
-};
-
-type SetPopupArg = {
-  type: "SET_POPUP";
-  arg: Parameters<typeof RendererSlice.setPopup>[0];
-};
-
-type SetShareDialogArg = {
-  type: "SET_SHARE_DIALOG";
-  arg: Parameters<typeof RendererSlice.setShareDialog>[0];
-};
-
-type SetShareDialogOpenArg = {
-  type: "SET_SHARE_DIALOG_OPEN";
-  arg: Parameters<typeof RendererSlice.setShareDialogOpen>[0];
-};
-
-type SetShareDialogUrl = {
-  type: "SET_SHARE_DIALOG_URL";
-  arg: Parameters<typeof RendererSlice.setShareDialogUrl>[0];
-};
-
-type SetNavIndexArg = {
-  type: "SET_NAV_INDEX";
-  arg: Parameters<typeof RendererSlice.setNavIndex>[0];
-};
-
-type SetSubnavArg = {
-  type: "SET_SUBNAV";
-  arg: Parameters<typeof RendererSlice.setSubNav>[0];
-};
-
-type SetTopArtistArg = {
-  type: "SET_TOPARTIST";
-  arg: Parameters<typeof RendererSlice.setTopArtist>[0];
-};
-
-type SetTopnavArg = {
-  type: "SET_TOPNAV";
-  arg: Parameters<typeof RendererSlice.setTopNav>[0];
-};
-
-type SetUpdateStateArg = {
-  type: "SET_UPDATE_STATE";
-  arg: Parameters<typeof RendererSlice.setUpdateState>[0];
-};
-
-type SetSyncStateArg = {
-  type: "SET_SYNC_STATE";
-  arg: Parameters<typeof RendererSlice.setSyncState>[0];
-};
-
-type SetToPushArg = {
-  type: "SET_TO_PUSH";
-  arg: Parameters<typeof RendererSlice.setSyncToPush>[0];
-};
-
 type SetHoverInArg = {
   type: "SET_HOVER_IN";
   arg: Parameters<typeof HoverSlice.setHoverIn>[0];
@@ -367,27 +262,9 @@ type SetManyDeckChangesArg = {
 };
 
 export type ActionsArg =
-  | SetSettingsArg
-  | SetAppSettingsArg
-  | SetArchivedSettingsArg
-  | SetBackColorArg
-  | SetBackGrpIdArg
-  | SetBackImageArg
-  | SetLoadingArg
-  | SetNoLogArg
-  | SetOfflineArg
-  | SetPatreonArg
-  | SetPopupArg
-  | SetShareDialogArg
-  | SetShareDialogOpenArg
-  | SetShareDialogUrl
-  | SetNavIndexArg
-  | SetSubnavArg
-  | SetTopnavArg
-  | SetTopArtistArg
-  | SetUpdateStateArg
-  | SetSyncStateArg
-  | SetToPushArg
+  | SettingsSlice.SetSettingsArg
+  | AppSettingsSlice.SetAppSettingsArg
+  | RendererSlice.RendererReducerArgs
   | SetHoverInArg
   | SetHoverOutArg
   | SetCanLoginArg

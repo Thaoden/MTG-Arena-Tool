@@ -1,7 +1,4 @@
-import {
-  createSlice,
-  PayloadAction
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SeasonalRankData } from "../../types/Season";
 import globalStore from "../../shared-store";
 
