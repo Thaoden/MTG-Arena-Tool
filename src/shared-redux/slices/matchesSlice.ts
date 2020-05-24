@@ -36,18 +36,6 @@ const _setManyMatches = (
   state.matchesIndex = [...newList, ...state.matchesIndex];
 };
 
-type SetMatchArg = {
-  type: "SET_MATCH";
-  arg: Parameters<typeof _setMatch>[1]["payload"];
-};
-
-type SetManyMatchesArg = {
-  type: "SET_MANY_MATCHES";
-  arg: Parameters<typeof _setManyMatches>[1]["payload"];
-};
-
-export type MatchesReducerArgs = SetMatchArg | SetManyMatchesArg;
-
 const matchesSlice = createSlice({
   name: "matches",
   initialState: initialMatchState,

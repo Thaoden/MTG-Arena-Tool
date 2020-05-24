@@ -33,18 +33,6 @@ const _setManyEconomy = (
   state.economyIndex = [...newList, ...state.economyIndex];
 };
 
-type SetEconomyArg = {
-  type: "SET_ECONOMY";
-  arg: Parameters<typeof _setEconomy>[1]["payload"];
-};
-
-type SetManyEconomyArg = {
-  type: "SET_MANY_ECONOMY";
-  arg: Parameters<typeof _setManyEconomy>[1]["payload"];
-};
-
-export type EconomyReducerArgs = SetEconomyArg | SetManyEconomyArg;
-
 const economySlice = createSlice({
   name: "economy",
   initialState: initialEconomyState,

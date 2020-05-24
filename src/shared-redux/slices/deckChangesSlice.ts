@@ -33,18 +33,6 @@ const _setManyChanges = (
   state.deckChangesIndex = [...newList, ...state.deckChangesIndex];
 };
 
-type SetDeckChangeArg = {
-  type: "SET_DECK_CHANGE";
-  arg: Parameters<typeof _setChange>[1]["payload"];
-};
-
-type SetManyDeckChangesArg = {
-  type: "SET_MANY_DECK_CHANGES";
-  arg: Parameters<typeof _setManyChanges>[1]["payload"];
-};
-
-export type DeckChangesReducerArgs = SetDeckChangeArg | SetManyDeckChangesArg;
-
 const deckChangesSlice = createSlice({
   name: "deckChanges",
   initialState: initialDeckChangesState,

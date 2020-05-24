@@ -88,32 +88,6 @@ const _setActiveEvents = (
   state.activeEvents.push(...action.payload);
 };
 
-type SetActiveEventsArg = {
-  type: "SET_ACTIVE_EVENTS";
-  arg: Parameters<typeof _setActiveEvents>[1]["payload"];
-};
-
-type SetExploreDataArg = {
-  type: "SET_EXPLORE_DATA";
-  arg: Parameters<typeof _setExploreData>[1]["payload"];
-};
-
-type SetExploreFiltersArg = {
-  type: "SET_EXPLORE_FILTERS";
-  arg: Parameters<typeof _setExploreFilters>[1]["payload"];
-};
-
-type SetExploreFiltersSkipArg = {
-  type: "SET_EXPLORE_FILTERS_SKIP";
-  arg: Parameters<typeof _setExploreFiltersSkip>[1]["payload"];
-};
-
-export type ExploreReducerArgs =
-  | SetActiveEventsArg
-  | SetExploreDataArg
-  | SetExploreFiltersArg
-  | SetExploreFiltersSkipArg;
-
 const exploreSlice = createSlice({
   name: "explore",
   initialState: initialExploreState,

@@ -33,18 +33,6 @@ const _setManyEvents = (
   state.eventsIndex = [...newList, ...state.eventsIndex];
 };
 
-type SetEventArg = {
-  type: "SET_EVENT";
-  arg: Parameters<typeof _setEvent>[1]["payload"];
-};
-
-type SetManyEventsArg = {
-  type: "SET_MANY_EVENTS";
-  arg: Parameters<typeof _setManyEvents>[1]["payload"];
-};
-
-export type EventsReducerArgs = SetEventArg | SetManyEventsArg;
-
 const eventsSlice = createSlice({
   name: "events",
   initialState: initialEventsState,

@@ -14,32 +14,15 @@ import * as EconomySlice from "./slices/economySlice";
 import * as DraftsSlice from "./slices/draftsSlice";
 import * as SeasonalSlice from "./slices/seasonalSlice";
 import * as DeckChangesSlice from "./slices/deckChangesSlice";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-export type ActionsArg =
-  | SettingsSlice.SettingsReducerArgs
-  | AppSettingsSlice.AppSettingsReducerArgs
-  | RendererSlice.RendererReducerArgs
-  | HoverSlice.HoverReducerArgs
-  | LoginSlice.LoginReducerArgs
-  | HomeSlice.HomeReducerArgs
-  | CollectionSlice.CollectionReducerArgs
-  | ExploreSlice.ExploreReducerArgs
-  | MatchesSlice.MatchesReducerArgs
-  | EventsSlice.EventsReducerArgs
-  | PlayerDataSlice.PlayerDataReducerArgs
-  | DecksSlice.DecksReducerTypes
-  | EconomySlice.EconomyReducerArgs
-  | DraftsSlice.DraftReducerArgs
-  | SeasonalSlice.SeasonalReducerArgs
-  | DeckChangesSlice.DeckChangesReducerArgs;
+export type DispatchParameter<K extends Actions> = {
+  type: K;
+  arg: Parameters<typeof actions[K]>[0];
+};
 
-export type Actions = ActionsArg["type"];
+export type Actions = keyof typeof actions;
 
-const actions: Record<
-  Actions,
-  ActionCreatorWithPayload<any, string> //<P, T> where P is the type of the payload and T the type of the Action
-> = {
+const actions = {
   SET_SETTINGS: SettingsSlice.setSettings,
   SET_APP_SETTINGS: AppSettingsSlice.setAppSettings,
   SET_ARCHIVED: RendererSlice.setArchived,

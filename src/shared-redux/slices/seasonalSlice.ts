@@ -40,18 +40,6 @@ const _setManySeasonal = (
   state.seasonal = newSeasonal;
 };
 
-type SetSeasonalArg = {
-  type: "SET_SEASONAL";
-  arg: Parameters<typeof _setSeasonal>[1]["payload"];
-};
-
-type SetManySeasonalArg = {
-  type: "SET_MANY_SEASONAL";
-  arg: Parameters<typeof _setManySeasonal>[1]["payload"];
-};
-
-export type SeasonalReducerArgs = SetSeasonalArg | SetManySeasonalArg;
-
 const seasonalSlice = createSlice({
   name: "seasonal",
   initialState: initialSeasonalState,

@@ -47,26 +47,6 @@ const _setManyStaticDecks = (
   state.decksIndex = [...newList, ...state.decksIndex];
 };
 
-type SetDeckArg = {
-  type: "SET_DECK";
-  arg: Parameters<typeof _setDeck>[1]["payload"];
-};
-
-type SetManyDecksArg = {
-  type: "SET_MANY_DECKS";
-  arg: Parameters<typeof _setManyDecks>[1]["payload"];
-};
-
-type SetManyStaticDecksArg = {
-  type: "SET_MANY_STATIC_DECKS";
-  arg: Parameters<typeof _setManyStaticDecks>[1]["payload"];
-};
-
-export type DecksReducerTypes =
-  | SetDeckArg
-  | SetManyDecksArg
-  | SetManyStaticDecksArg;
-
 const decksSlice = createSlice({
   name: "decks",
   initialState: initialDecksState,

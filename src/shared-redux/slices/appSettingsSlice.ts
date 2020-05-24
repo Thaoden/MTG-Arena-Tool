@@ -32,12 +32,5 @@ const settingsSlice = createSlice({
   }
 });
 
-type SetAppSettingsArg = {
-  type: "SET_APP_SETTINGS";
-  arg: Parameters<typeof _setAppSettings>[1]["payload"];
-};
-
-export type AppSettingsReducerArgs = SetAppSettingsArg;
-
 export const { setAppSettings } = settingsSlice.actions;
 export default settingsSlice;

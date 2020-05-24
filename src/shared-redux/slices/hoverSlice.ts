@@ -24,18 +24,6 @@ const _setHoverOut = (state: Hover): void => {
   state.opacity = 0;
 };
 
-type SetHoverInArg = {
-  type: "SET_HOVER_IN";
-  arg: Parameters<typeof _setHoverIn>[1]["payload"];
-};
-
-type SetHoverOutArg = {
-  type: "SET_HOVER_OUT";
-  arg: never;
-};
-
-export type HoverReducerArgs = SetHoverInArg | SetHoverOutArg;
-
 const hoverSlice = createSlice({
   name: "hover",
   initialState: initialHover,

@@ -33,18 +33,6 @@ const _setManyDrafts = (
   state.draftsIndex = [...newList, ...state.draftsIndex];
 };
 
-type SetDraftArg = {
-  type: "SET_DRAFT";
-  arg: Parameters<typeof _setDraft>[1]["payload"];
-};
-
-type SetManyDraftArg = {
-  type: "SET_MANY_DRAFT";
-  arg: Parameters<typeof _setManyDrafts>[1]["payload"];
-};
-
-export type DraftReducerArgs = SetDraftArg | SetManyDraftArg;
-
 const draftsSlice = createSlice({
   name: "drafts",
   initialState: initialDraftsState,

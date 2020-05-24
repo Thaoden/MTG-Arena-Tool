@@ -46,44 +46,6 @@ const _setCanLogin = (state: Login, action: PayloadAction<boolean>): void => {
   state.canLogin = action.payload;
 };
 
-type SetCanLoginArg = {
-  type: "SET_CAN_LOGIN";
-  arg: Parameters<typeof _setCanLogin>[1]["payload"];
-};
-
-type SetLoginEmailArg = {
-  type: "SET_LOGIN_EMAIL";
-  arg: Parameters<typeof _setLoginEmail>[1]["payload"];
-};
-
-type SetLoginFormArg = {
-  type: "SET_LOGIN_FORM";
-  arg: Parameters<typeof _setLoginForm>[1]["payload"];
-};
-
-type SetLoginPasswordArg = {
-  type: "SET_LOGIN_PASSWORD";
-  arg: Parameters<typeof _setLoginPassword>[1]["payload"];
-};
-
-type SetLoginRememberArg = {
-  type: "SET_LOGIN_REMEMBER";
-  arg: Parameters<typeof _setLoginRemember>[1]["payload"];
-};
-
-type SetLoginStateArg = {
-  type: "SET_LOGIN_STATE";
-  arg: Parameters<typeof _setLoginState>[1]["payload"];
-};
-
-export type LoginReducerArgs =
-  | SetCanLoginArg
-  | SetLoginEmailArg
-  | SetLoginFormArg
-  | SetLoginPasswordArg
-  | SetLoginRememberArg
-  | SetLoginStateArg;
-
 const loginSlice = createSlice({
   name: "login",
   initialState: initialLoginState,
